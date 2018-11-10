@@ -64,7 +64,6 @@ void keyboard( unsigned char key, int x, int y ) {
 }
 
 void specialkeys(int key, int x, int y) {
-	float translateStep = 5.0;
 	switch(key) {
 		case GLUT_KEY_UP:
 			// do something
