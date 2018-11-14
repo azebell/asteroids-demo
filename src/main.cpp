@@ -13,8 +13,9 @@
 #include <stdio.h>
 #include <math.h>
 #include <vector>
-#include "glFuncs.h"
 #include "zgeom.h"
+#include "clipoctagon.h"
+#include "glFuncs.h"
 
 
 // Specify the values to place and size the window on the screen
@@ -25,11 +26,18 @@ const int WINDOW_MAX_Y = 1000;
 
 const int FRAMERATE = 1000.0/60.0;
 
+std::vector<vec3> clipWindow;
+
 void display( void ) {
 
 	clearScreen();
 
 	/* DRAW STUFF */
+	glBegin(GL_LINE_LOOP);
+	for(unsigned i=0; i<clipWindow.size(); i++) {
+		glVertex3f(clipWindow[i].x, clipWindow[i].y, 0.0);
+	}
+	glEnd();
 
 	swapBuffers();
 
@@ -37,6 +45,8 @@ void display( void ) {
 
 void update( int value ) {
 	/* DO STUFF */
+	glutTimerFunc(FRAMERATE,update,0);
+	display();
 }
 
 void mouse( int button, int state, int x, int y ) {
@@ -91,6 +101,11 @@ int main(int argc, char** argv) {
 		WINDOW_MAX_X,
 		WINDOW_MAX_Y
 	);
+
+	float d = 400.0;
+	if(argc >= 2)
+		d = atof(argv[1]);
+	clipWindow = genOctagon(WINDOW_MAX_X/2.0, WINDOW_MAX_Y/2.0, d/2.0);
 
 	glutMouseFunc(mouse);
 	glutKeyboardFunc(keyboard);
