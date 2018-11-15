@@ -40,55 +40,38 @@ int find_ear(const vec3 *vertices, unsigned int N, int CCW) {
 	return 0;
 }
 
-std::vector<int> triangulate(std::vector<vec3> vertices, int CCW) {
-	int N = vertices.size();
+std::vector<vec3> triangulate(std::vector<vec3> vertices, int CCW) {
 	
+	int N = vertices.size();
 	if(N < 3) {
-		std::vector<int> empty;
+		std::vector<vec3> empty;
 		return empty;
 	}
 	else if(N == 3) {
-		std::vector<int> indices = {0,1,2};
-		return indices;
+		std::vector<vec3> result;
+		result.push_back(vertices[0]);
+		result.push_back(vertices[1]);
+		result.push_back(vertices[2]);
+		return result;
 	}
 
 	int ear, prev, next;
-	std::vector<int> result;
-	std::vector<int> indices;
-	for(int i=0; i<N; i++) {
-		indices.push_back(i);
-	}
+	std::vector<vec3> result;
 
 	while(N>3) {
 		ear = find_ear(&vertices[0], N, CCW);
 		prev = positive_modulo(ear-1, N);
 		next = positive_modulo(ear+1, N);
-		result.push_back(indices[prev]);
-		result.push_back(indices[ear]);
-		result.push_back(indices[next]);
+		result.push_back(vertices[prev]);
+		result.push_back(vertices[ear]);
+		result.push_back(vertices[next]);
 		vertices.erase(vertices.begin()+ear);
-		indices.erase(indices.begin()+ear);
 		N--;
 	}
-	result.push_back(indices[0]);
-	result.push_back(indices[1]);
-	result.push_back(indices[2]);
+	result.push_back(vertices[0]);
+	result.push_back(vertices[1]);
+	result.push_back(vertices[2]);
 
-	return result;
-}
-
-std::vector<vec3> triangulate_verts(std::vector<vec3> vertices, int CCW) {
-	std::vector<int> indices = triangulate(vertices, CCW);
-	std::vector<vec3> result = tris_from_indices(indices, vertices);
-	return result;
-}
-
-std::vector<vec3> tris_from_indices(std::vector<int> indices, std::vector<vec3> vertices) {
-	int N = indices.size();
-	std::vector<vec3> result(indices.size());
-	for(int i=0; i<N; i++) {
-		result.push_back(vertices[indices[i]]);
-	}
 	return result;
 }
 
