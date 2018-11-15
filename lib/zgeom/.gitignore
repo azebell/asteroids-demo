@@ -1,0 +1,13 @@
+*
+
+!src/*.cpp
+!src/*.h
+!tests/*.cpp
+!include/*.h
+!Makefile
+
+!*/
+obj/
+
+!.gitignore
+!.gitlab-ci.yml
