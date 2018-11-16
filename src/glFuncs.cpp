@@ -1,6 +1,10 @@
+/*
+#include <string.h>	//***moved to includes.h
+*/
 
+#include "includes.h"
+#include "structs.h"
 #include "glFuncs.h"
-#include <string.h>
 
 void setupGlut( int wpx, int wpy, int wdx, int wdy ) {
 	// pass dummy args to glutInit

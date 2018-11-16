@@ -1,22 +1,28 @@
-
 #ifndef ASTEROID_H
 #define ASTEROID_H
 
-#include "zgeom.h"
+/*
+#include "zgeom.h"	//***moved to includes
 #include <vector>
+*/
+
+#include "includes.h"
+#include "structs.h"
+
+using namespace std;
 
 class Asteroid {
 private:
 public:
-	vec3 pos; // position
-	vec3 vel; // velocity
+	vector3D pos; // position
+	vector3D vel; // velocity
 	float theta; // rotation
 	float alpha; // rotational velocity
-	mat4 transform;
-	std::vector<vec3> verts; // polygon vertices
-	std::vector<vec3> Tverts; // transformed vertices
+	//mat4 transform;
+	vector<vector3D> verts; // polygon vertices
+	vector<vector3D> Tverts; // transformed vertices
 
-	Asteroid(vec3 position);
+	Asteroid(vector3D position);
 	void update();
 	void render();
 };
