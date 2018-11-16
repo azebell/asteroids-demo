@@ -11,7 +11,6 @@
 
 #include <GL/glut.h>
 #include <stdio.h>
-#include <math.h>
 #include <vector>
 #include "zgeom.h"
 #include "clipoctagon.h"
@@ -102,7 +101,7 @@ int main(int argc, char** argv) {
 		WINDOW_MAX_Y
 	);
 
-	float d = 400.0;
+	float d = 750.0;
 	if(argc >= 2)
 		d = atof(argv[1]);
 	clipWindow = genOctagon(WINDOW_MAX_X/2.0, WINDOW_MAX_Y/2.0, d/2.0);
