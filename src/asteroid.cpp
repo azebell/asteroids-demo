@@ -8,6 +8,7 @@ float rand_range(float range) {
 	return r*range;
 }
 
+// creating Asteroid with random geometry
 Asteroid::Asteroid(vec3 position) :
 pos(position) {
 	float PI = 3.14159265359;
@@ -31,15 +32,29 @@ pos(position) {
 	this->Tverts = verts;
 }
 
+// creating Asteroid with predefined geometry
+Asteroid::Asteroid(vec3 position, std::vector<vec3> vertices) :
+pos(position), verts(vertices) {
+	this->vel = {rand_range(10),rand_range(10),0.0};
+	this->theta = 0.0;
+	this->alpha = rand_range(1.0);
+
+	this->Tverts = verts;
+}
+
 void Asteroid::update() {
 	this->pos.x += this->vel.x;
 	this->pos.y += this->vel.y;
 	this->pos.z += this->vel.z;
 	this->theta += this->alpha;
 
+	// TODO 
+	// update the transform matrix
+	// and the Tverts
 }
 
 void Asteroid::render() {
-
+	// TODO
+	// add render code
 }
 
