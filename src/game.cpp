@@ -32,7 +32,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 	float PI = 3.14159265359;
 	float ang = PI/8.0;
 	for(int i=0; i<8; i++) {
-		this->clipWindow.insert(this->clipWindow.begin(), {
+		this->clipWindow.push_back({
 			this->origin.x + (float)cos(ang)*octRadius,
 			this->origin.y + (float)sin(ang)*octRadius
 		});

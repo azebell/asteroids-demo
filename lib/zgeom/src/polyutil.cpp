@@ -31,7 +31,7 @@ float tri_area(vec3 a, vec3 b, vec3 c) {
 //   <0 a is right
 //////////////////////////////////////////////////////
 float pointIsLeft(vec3 a, vec3 b, vec3 c) {
-	return ( (b.x - c.x) * (a.y - c.y) - (a.x -  c.x) * (b.y - c.y) );
+	return ( (c.x - b.x) * (a.y - b.y) - (a.x -  b.x) * (c.y - b.y) );
 }
 
 //////////////////////////////////////////////////////
