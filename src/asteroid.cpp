@@ -1,7 +1,7 @@
 
 #include "asteroid.h"
-#include <math.h> // for trig
-#include <cstdlib> // for rand()
+#include <math.h>
+#include <cstdlib>
 #include "glFuncs.h"
 
 float rand_range(float range) {
@@ -10,7 +10,7 @@ float rand_range(float range) {
 }
 
 // creating Asteroid with random geometry
-Asteroid::Asteroid(vec3 position) :
+Asteroid::Asteroid(vec3 position, float radius) :
 pos(position) {
 	float PI = 3.14159265359;
 	this->vel = {rand_range(2.5),rand_range(2.5),0.0};
@@ -19,12 +19,11 @@ pos(position) {
 
 	float iwx = 1 - rand_range(0.5), wx = iwx;
 	float iwy = 1 - rand_range(0.5), wy = iwy;
-	float r = 50; // radius of asteroid
 	int p = 8; // number of points in asteroid
 	for(int i=0; i<p; i++) {
 		this->verts.push_back( {
-			wx*r* (float)cos(i*2*PI/p),
-			wy*r* (float)sin(i*2*PI/p)
+			wx*radius* (float)cos(i*2*PI/p),
+			wy*radius* (float)sin(i*2*PI/p)
 		});
 
 		wx = 1 - rand_range(0.5);
@@ -36,9 +35,9 @@ pos(position) {
 // creating Asteroid with predefined geometry
 Asteroid::Asteroid(vec3 position, std::vector<vec3> vertices) :
 pos(position), verts(vertices) {
-	this->vel = {rand_range(10),rand_range(10),0.0};
+	this->vel = {rand_range(2.5),rand_range(2.5),0.0};
 	this->theta = 0.0;
-	this->alpha = rand_range(1.0);
+	this->alpha = rand_range(0.1);
 
 	this->Tverts = verts;
 }

@@ -51,6 +51,10 @@ void keyboard( unsigned char key, int x, int y ) {
 		case 'Q':
 			exit(0);
 			break;
+		case 'b':
+		case 'B':
+			g.bustTest();
+			break;
 		default:
 			break;
 	}

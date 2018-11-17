@@ -21,14 +21,14 @@ public:
 	// TODO 
 	// add Bullets vector to game
 
-	int missilesFired;
-	int hits;
-	float accuracy; // hits/missilesFired
+	// TODO 
+	// add Scoreboard object to game
 
 	Game();
 	void init(int window_width, int window_height, float octDiameter);
 	void update();
 	void render();
+	void bustTest();
 };
 
 #endif // GAME_H

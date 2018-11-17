@@ -1,6 +1,7 @@
 
 #include "game.h"
 #include "asteroid.h"
+#include "bust.h"
 #include "zgeom.h"
 #include "glFuncs.h" // for rendering clipWindow
 #include <vector>
@@ -17,7 +18,7 @@ void Game::init(int window_width, int window_height, float octDiameter) {
 	// make placement random
 	float x=100.0, y=500.0;
 	for(int i=0; i<10; i++) {
-		Asteroid a( (vec3) {x, y} );
+		Asteroid a( (vec3) {x, y} , 25.0 );
 		this->asteroids.push_back(a);
 		x += 100.0;
 	}
@@ -42,6 +43,10 @@ void Game::update() {
 	for(unsigned i=0; i<this->asteroids.size(); i++) {
 		this->asteroids[i].update();
 	}
+	// update each triroid
+	for(unsigned i=0; i<this->triroids.size(); i++) {
+		this->triroids[i].update();
+	}
 }
 
 void Game::render() {
@@ -59,7 +64,19 @@ void Game::render() {
 	for(unsigned i=0; i < this->asteroids.size(); i++) {
 		this->asteroids[i].render();
 	}
+	// draw the triroids
+	for(unsigned i=0; i < this->triroids.size(); i++) {
+		this->triroids[i].render();
+	}
 	
 	swapBuffers();
+}
+
+void Game::bustTest() {
+	if(asteroids.size()<1)
+		return;
+	std::vector<Asteroid> bustRoids = bustTris(asteroids[0]);
+	this->triroids.insert(this->triroids.end(), bustRoids.begin(), bustRoids.end());
+	this->asteroids.erase(this->asteroids.begin());
 }
 

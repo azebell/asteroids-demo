@@ -16,7 +16,7 @@ public:
 	std::vector<vec3> verts; // polygon vertices
 	std::vector<vec3> Tverts; // transformed vertices
 
-	Asteroid(vec3 position);
+	Asteroid(vec3 position, float radius);
 	Asteroid(vec3 position, std::vector<vec3> vertices);
 	void update();
 	void render();
