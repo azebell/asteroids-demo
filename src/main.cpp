@@ -1,20 +1,16 @@
 ////////////////////////////////////////
 //
-// Author: Avery Zebell
+// Authors: ____________
 // Date: 2018-xx-xx
 // Description:
-//   An interactive demonstration of
-//   the ear clipping algorithm using
-//   OpenGL and GLUT.
+//   Asteroids game.
 //
 ////////////////////////////////////////
 
 #include <GL/glut.h>
-#include <stdio.h>
-#include <vector>
 #include "zgeom.h"
-#include "clipoctagon.h"
 #include "glFuncs.h"
+#include "game.h"
 
 
 // Specify the values to place and size the window on the screen
@@ -25,26 +21,15 @@ const int WINDOW_MAX_Y = 1000;
 
 const int FRAMERATE = 1000.0/60.0;
 
-std::vector<vec3> clipWindow;
+Game g;
 
 void display( void ) {
-
-	clearScreen();
-
-	/* DRAW STUFF */
-	glBegin(GL_LINE_LOOP);
-	for(unsigned i=0; i<clipWindow.size(); i++) {
-		glVertex3f(clipWindow[i].x, clipWindow[i].y, 0.0);
-	}
-	glEnd();
-
-	swapBuffers();
-
+	g.render();
 }
 
 void update( int value ) {
-	/* DO STUFF */
 	glutTimerFunc(FRAMERATE,update,0);
+	g.update();
 	display();
 }
 
@@ -104,7 +89,8 @@ int main(int argc, char** argv) {
 	float d = 750.0;
 	if(argc >= 2)
 		d = atof(argv[1]);
-	clipWindow = genOctagon(WINDOW_MAX_X/2.0, WINDOW_MAX_Y/2.0, d/2.0);
+
+	g.init(WINDOW_MAX_X, WINDOW_MAX_Y, d);
 
 	glutMouseFunc(mouse);
 	glutKeyboardFunc(keyboard);

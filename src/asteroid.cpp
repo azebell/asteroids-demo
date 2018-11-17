@@ -2,6 +2,7 @@
 #include "asteroid.h"
 #include <math.h> // for trig
 #include <cstdlib> // for rand()
+#include "glFuncs.h"
 
 float rand_range(float range) {
 	float r = ((rand()%100)/50.0) - 1.0;
@@ -12,9 +13,9 @@ float rand_range(float range) {
 Asteroid::Asteroid(vec3 position) :
 pos(position) {
 	float PI = 3.14159265359;
-	this->vel = {rand_range(10),rand_range(10),0.0};
+	this->vel = {rand_range(2.5),rand_range(2.5),0.0};
 	this->theta = 0.0;
-	this->alpha = rand_range(1.0);
+	this->alpha = rand_range(0.1);
 
 	float iwx = 1 - rand_range(0.5), wx = iwx;
 	float iwy = 1 - rand_range(0.5), wy = iwy;
@@ -51,10 +52,18 @@ void Asteroid::update() {
 	// TODO 
 	// update the transform matrix
 	// and the Tverts
+	this->transform = mat4Identity();
+	mat4RotateZ(&this->transform, this->theta);
+	mat4Translate(&this->transform, this->pos);
+	this->Tverts = applyTransform(this->transform, this->verts);
 }
 
 void Asteroid::render() {
-	// TODO
-	// add render code
+	// draw the asteroid
+	glBegin(GL_LINE_LOOP);
+	for(unsigned i=0; i < this->Tverts.size(); i++) {
+		glVertex3f(this->Tverts[i].x, this->Tverts[i].y, 0.0);
+	}
+	glEnd();
 }
 

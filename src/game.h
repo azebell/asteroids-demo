@@ -26,6 +26,7 @@ public:
 	float accuracy; // hits/missilesFired
 
 	Game();
+	void init(int window_width, int window_height, float octDiameter);
 	void update();
 	void render();
 };
