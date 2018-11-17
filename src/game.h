@@ -9,6 +9,8 @@
 class Game {
 private:
 public:
+	vec3 origin; // will be the center of octagon
+
 	std::vector<Asteroid> asteroids; // base asteroids
 	std::vector<Asteroid> triroids; // triangle asteroids
 	std::vector<Asteroid> baryroids; // barycentric asteroids
@@ -25,9 +27,10 @@ public:
 	// add Scoreboard object to game
 
 	Game();
-	void init(int window_width, int window_height, float octDiameter);
+	void init(int window_width, int window_height, float octRadius);
 	void update();
 	void render();
+	int checkClipping(Asteroid A);
 	void bustTest();
 };
 

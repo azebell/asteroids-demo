@@ -90,11 +90,11 @@ int main(int argc, char** argv) {
 		WINDOW_MAX_Y
 	);
 
-	float d = 750.0;
+	float radius = 400.0;
 	if(argc >= 2)
-		d = atof(argv[1]);
+		radius = atof(argv[1])/2.0;
 
-	g.init(WINDOW_MAX_X, WINDOW_MAX_Y, d);
+	g.init(WINDOW_MAX_X, WINDOW_MAX_Y, radius);
 
 	glutMouseFunc(mouse);
 	glutKeyboardFunc(keyboard);

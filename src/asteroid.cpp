@@ -42,19 +42,24 @@ pos(position), verts(vertices) {
 	this->Tverts = verts;
 }
 
+void Asteroid::transformVerts() {
+	this->transform = mat4Identity();
+	mat4RotateZ(&this->transform, this->theta);
+	mat4Translate(&this->transform, this->pos);
+	this->Tverts = applyTransform(this->transform, this->verts);
+}
+
+void Asteroid::clip(std::vector<vec3> clipper) {
+	this->Tverts = clip_sh(this->Tverts, clipper);
+}
+
 void Asteroid::update() {
 	this->pos.x += this->vel.x;
 	this->pos.y += this->vel.y;
 	this->pos.z += this->vel.z;
 	this->theta += this->alpha;
 
-	// TODO 
-	// update the transform matrix
-	// and the Tverts
-	this->transform = mat4Identity();
-	mat4RotateZ(&this->transform, this->theta);
-	mat4Translate(&this->transform, this->pos);
-	this->Tverts = applyTransform(this->transform, this->verts);
+	this->transformVerts();
 }
 
 void Asteroid::render() {
