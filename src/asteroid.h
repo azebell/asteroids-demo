@@ -16,6 +16,14 @@ public:
 	std::vector<vec3> verts; // polygon vertices
 	std::vector<vec3> Tverts; // transformed vertices
 
+	enum AsteroidType {
+		POLYROID,
+		TRIROID,
+		BARYROID
+	};
+
+	AsteroidType type;
+
 	Asteroid(vec3 position, float radius);
 	Asteroid(vec3 position, std::vector<vec3> vertices);
 	void transformVerts();

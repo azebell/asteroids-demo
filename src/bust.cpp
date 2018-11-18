@@ -32,6 +32,7 @@ std::vector<Asteroid> bustTris(Asteroid A) {
 		vec3 newPos = A.pos + centroid;
 		Asteroid tmp(newPos, vertices);
 		tmp.vel = vec3Mag(tmp.vel) * vec3Unit(centroid);
+		tmp.type = Asteroid::TRIROID;
 		tmp.update();
 		result.push_back(tmp);
 	}

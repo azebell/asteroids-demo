@@ -45,10 +45,6 @@ void Game::update() {
 	for(unsigned i=0; i<this->asteroids.size(); i++) {
 		this->asteroids[i].update();
 	}
-	// update each triroid
-	for(unsigned i=0; i<this->triroids.size(); i++) {
-		this->triroids[i].update();
-	}
 }
 
 void Game::render() {
@@ -72,26 +68,19 @@ void Game::render() {
 		asteroids[i].clip(this->clipWindow);
 		this->asteroids[i].render();
 	}
-	// draw the triroids
-	for(unsigned i=0; i < this->triroids.size(); i++) {
-		int clip = this->checkClipping( this->triroids[i] );
-		if(clip == -1) {
-			triroids[i].pos = 2*origin - triroids[i].pos;
-			triroids[i].update();
-		}
-		triroids[i].clip(this->clipWindow);
-		this->triroids[i].render();
-	}
 	
 	swapBuffers();
 }
 
 void Game::bustTest() {
-	if(asteroids.size()<1)
-		return;
-	std::vector<Asteroid> bustRoids = bustTris(asteroids[0]);
-	this->triroids.insert(this->triroids.end(), bustRoids.begin(), bustRoids.end());
-	this->asteroids.erase(this->asteroids.begin());
+	for(unsigned i=0; i<asteroids.size(); i++) {
+		if(asteroids[i].type == Asteroid::POLYROID) {
+			std::vector<Asteroid> bustRoids = bustTris(asteroids[i]);
+			this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
+			this->asteroids.erase(this->asteroids.begin()+i);
+			return;
+		}
+	}
 }
 
 int Game::checkClipping(Asteroid A) {

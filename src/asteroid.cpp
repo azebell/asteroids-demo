@@ -30,6 +30,7 @@ pos(position) {
 		wy = 1 - rand_range(0.5);
 	}
 	this->Tverts = verts;
+	this->type = Asteroid::POLYROID;
 }
 
 // creating Asteroid with predefined geometry
@@ -40,6 +41,7 @@ pos(position), verts(vertices) {
 	this->alpha = rand_range(0.1);
 
 	this->Tverts = verts;
+	this->type = Asteroid::POLYROID;
 }
 
 void Asteroid::transformVerts() {

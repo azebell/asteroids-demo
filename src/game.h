@@ -11,9 +11,7 @@ private:
 public:
 	vec3 origin; // will be the center of octagon
 
-	std::vector<Asteroid> asteroids; // base asteroids
-	std::vector<Asteroid> triroids; // triangle asteroids
-	std::vector<Asteroid> baryroids; // barycentric asteroids
+	std::vector<Asteroid> asteroids;
 	
 	std::vector<vec3> clipWindow; // clipping window
 
