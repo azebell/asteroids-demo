@@ -31,7 +31,7 @@ float tri_area(vec3 a, vec3 b, vec3 c) {
 //   <0 a is right
 //////////////////////////////////////////////////////
 float pointIsLeft(vec3 a, vec3 b, vec3 c) {
-	return ( (b.x - c.x) * (a.y - c.y) - (a.x -  c.x) * (b.y - c.y) );
+	return ( (c.x - b.x) * (a.y - b.y) - (a.x -  b.x) * (c.y - b.y) );
 }
 
 //////////////////////////////////////////////////////
@@ -52,15 +52,13 @@ int point_in_triangle(vec3 p, vec3 a, vec3 b, vec3 c) {
 // Winding number test for a point in a polygon.
 // Return:  wn = the winding number (=0 only when P is outside)
 //////////////////////////////////////////////////////
-int point_in_poly(vec3 p, vec3 *poly, unsigned int N) {
+int point_in_poly(vec3 p, vec3 *poly, unsigned N) {
 	int wn = 0;
-	//int N = poly.size();
 	int curr, next;
 
-	/*
-	for(int i=0; i<N; i++) {
-		curr = positive_modulo(i,N);
-		next = positive_modulo(i+1,N);
+	curr = N-1;
+	for(unsigned i=0; i<N; i++) {
+		next = i;
 		if(poly[curr].y <= p.y) {          // start y <= P.y
 			if(poly[next].y > p.y)      // an upward crossing
 				if(pointIsLeft(poly[curr], poly[next], p) > 0)  // P left of  edge
@@ -71,21 +69,7 @@ int point_in_poly(vec3 p, vec3 *poly, unsigned int N) {
 				if(pointIsLeft(poly[curr], poly[next], p) < 0)  // P right of  edge
 					wn--;            // have  a valid down intersect
 		}
-	}
-	return wn;
-	*/
-
-	for(unsigned int i=0; i<N; i++) {
-		curr = positive_modulo(i,N);
-		next = positive_modulo(i+1,N);
-		if(poly[curr].x >= p.x || poly[next].x >= p.x) {
-			if(poly[curr].y <= p.y && poly[next].y > p.y) {
-				wn++;
-			}
-			else if(poly[next].y <= p.y && poly[curr].y > p.y) {
-				wn--;
-			}
-		}
+		curr = next;
 	}
 	return wn;
 }

@@ -1,13 +1,8 @@
 #ifndef ASTEROID_H
 #define ASTEROID_H
 
-/*
-#include "zgeom.h"	//***moved to includes
+#include "zgeom.h"
 #include <vector>
-*/
-
-#include "includes.h"
-#include "structs.h"
 
 using namespace std;
 
@@ -22,7 +17,19 @@ public:
 	vector<vector3D> verts; // polygon vertices
 	vector<vector3D> Tverts; // transformed vertices
 
-	Asteroid(vector3D position);
+	enum AsteroidType {
+		POLYROID,
+		TRIROID,
+		BARYROID
+	};
+
+	AsteroidType type;
+
+	Asteroid(vec3 position, float radius);
+	Asteroid(vec3 position, std::vector<vec3> vertices);
+	void transformVerts();
+	void clip(std::vector<vec3> clipper);
+
 	void update();
 	void render();
 };

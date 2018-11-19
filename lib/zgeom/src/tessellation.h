@@ -19,6 +19,11 @@ unsigned int tris_in_poly(unsigned int N);
 
 #include <vector>
 
+typedef enum WindingType {
+	CW_WINDING,
+	CCW_WINDING
+} WindingType;
+
 // triangulate list of vertices with 
 // the earclipping algorithm and return the tris
 std::vector<vec3> triangulate(std::vector<vec3> vertices, int CCW);

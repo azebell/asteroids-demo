@@ -24,7 +24,7 @@ float tri_area(vec3 a, vec3 b, vec3 c);
 
 int point_in_triangle(vec3 p, vec3 a, vec3 b, vec3 c);
 
-int point_in_poly(vec3 p, vec3 *poly, unsigned int N);
+int point_in_poly(vec3 p, vec3 *poly, unsigned N);
 
 #ifdef __cplusplus
 }

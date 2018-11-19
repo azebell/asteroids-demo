@@ -1,13 +1,8 @@
 #ifndef CLIPOCTAGON_H
 #define CLIPOCTAGON_H
 
-/*
-#include "zgeom.h"	//***moved to includes.h
+#include "zgeom.h"
 #include <vector>
-*/
-
-#include "includes.h"
-#include "structs.h"
 
 using namespace std;
 
