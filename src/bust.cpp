@@ -6,7 +6,12 @@
 std::vector<Asteroid> bustTris(Asteroid A) {
 	std::vector<Asteroid> result;
 
-	std::vector<vec3> tris = triangulate(A.verts, CCW_WINDING);
+	// get the unclipped, rotated verts
+	mat4 T = mat4Identity();
+	mat4RotateZ(&T, A.theta);
+	A.Tverts = applyTransform(T, A.verts);
+	// get each triangle of the asteroid
+	std::vector<vec3> tris = triangulate(A.Tverts, CCW_WINDING);
 
 	// For each triangle, find the centroid
 	// and move the triangle to the model-space
