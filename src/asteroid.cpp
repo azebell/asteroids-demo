@@ -1,6 +1,8 @@
 #include <math.h>
 #include <cstdlib>
 #include "glFuncs.h"
+#include "zgeom.h"
+#include "asteroid.h"
 
 float rand_range(float range) {
 	float r = ((rand()%100)/50.0) - 1.0;

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-vector<vector3D> genOctagon(float cx, float cy, float radius);
+vector<vec3> genOctagon(float cx, float cy, float radius);
 
 #endif // CLIPOCTAGON_H
 
