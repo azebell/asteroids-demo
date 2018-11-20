@@ -8,7 +8,6 @@
 ////////////////////////////////////////
 
 #include <GL/glut.h>
-#include "zgeom.h"
 #include "glFuncs.h"
 #include "game.h"
 
@@ -33,52 +32,13 @@ void update( int value ) {
 	display();
 }
 
-void mouse( int button, int state, int x, int y ) {
 
-	if( button == GLUT_LEFT_BUTTON && state == GLUT_DOWN ) {
-	}
-	else if( button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN ) {
-	}
-	else if( button == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN ) {
-	}
-	glutPostRedisplay();
+void keyboardRelay(unsigned char key, int x, int y) {
+	g.keyHandler(key, x, y);
 }
 
-
-void keyboard( unsigned char key, int x, int y ) {
-	switch(key) {
-		case 'q':
-		case 'Q':
-			exit(0);
-			break;
-		case 'b':
-		case 'B':
-			g.bustTest();
-			break;
-		default:
-			break;
-	}
-	glutPostRedisplay();
-}
-
-void specialkeys(int key, int x, int y) {
-	switch(key) {
-		case GLUT_KEY_UP:
-			// do something
-			break;
-		case GLUT_KEY_DOWN:
-			// do something
-			break;
-		case GLUT_KEY_LEFT:
-			// do something
-			break;
-		case GLUT_KEY_RIGHT:
-			// do something
-			break;
-		default:
-			break;
-	}
-	glutPostRedisplay();
+void specialkeyRelay(int key, int x, int y) {
+	g.specialKeyHandler(key, x, y);
 }
 
 int main(int argc, char** argv) {
@@ -96,9 +56,9 @@ int main(int argc, char** argv) {
 
 	g.init(WINDOW_MAX_X, WINDOW_MAX_Y, radius);
 
-	glutMouseFunc(mouse);
-	glutKeyboardFunc(keyboard);
-	glutSpecialFunc(specialkeys); // key handler for arrow keys
+	//glutMouseFunc(mouse);
+	glutKeyboardFunc(keyboardRelay);
+	glutSpecialFunc(specialkeyRelay); // key handler for arrow keys
 	glutDisplayFunc(display);
 	glutTimerFunc(FRAMERATE,update,0);
 	glutMainLoop();

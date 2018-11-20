@@ -30,6 +30,11 @@ public:
 	void render();
 	int checkClipping(Asteroid A);
 	void bustTest();
+
+	// function to handle keypresses relayed from glut
+	void keyHandler(unsigned char key, int x, int y);
+	// function to handle special keys (UP, LEFT, RIGHT, DOWN, etc.)
+	void specialKeyHandler(int key, int x, int y);
 };
 
 #endif // GAME_H
