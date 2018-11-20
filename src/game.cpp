@@ -73,14 +73,10 @@ void Game::render() {
 }
 
 void Game::bustTest() {
-	for(unsigned i=0; i<asteroids.size(); i++) {
-		if(asteroids[i].type == Asteroid::POLYROID) {
-			std::vector<Asteroid> bustRoids = bustTris(asteroids[i]);
-			this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
-			this->asteroids.erase(this->asteroids.begin()+i);
-			return;
-		}
-	}
+	std::vector<Asteroid> bustRoids = bustTris(asteroids[0]);
+	this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
+	this->asteroids.erase(this->asteroids.begin());
+	return;
 }
 
 int Game::checkClipping(Asteroid A) {
