@@ -2,10 +2,12 @@
 #include <math.h>
 #include <cstdlib>
 #include "glFuncs.h"
+#include <iostream>
 
 // creating Spaceship with specified geometry
 Spaceship::Spaceship(){
     float wx = 1000, wy = 1000;
+    this->vel = {0.0,0.0,0.0};
     this->verts.push_back( { wx/2, wy/2 });
     this->verts.push_back( { wx/2-10, wy/2+10 });
     this->verts.push_back( { wx/2+20, wy/2 });
@@ -14,19 +16,25 @@ Spaceship::Spaceship(){
 }
 
 void Spaceship::setRotationAngle(float angle){
-    this->theta = angle;
+    std::cout << "theta: " << theta << " angle: "<< angle << std::endl; 
+    if(alpha == 0)
+        this -> alpha = angle;
+    else{
+        alpha = 0;
+        angle = 0;
+    }
 }
 
+// update Spaceship with new rotation direction
 void Spaceship::update() {
+    
     this->theta += this->alpha;
 
-    // TODO
-    // update the transform matrix
-    // and the Tverts
+    // not rotating around origin
     this->transform = mat4Identity();
-    mat4RotateZ(&this->transform, this->theta);
-    mat4Translate(&this->transform, this->pos);
+    mat4RotateZ(&this->transform, this->theta); 
     this->Tverts = applyTransform(this->transform, this->verts);
+    this -> alpha = 0;
 }
 
 

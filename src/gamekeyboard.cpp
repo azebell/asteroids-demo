@@ -20,18 +20,16 @@ void Game::keyHandler(unsigned char key, int x, int y) {
 void Game::specialKeyHandler(int key, int x, int y) {
 	switch(key) {
 		case GLUT_KEY_UP:
-            spaceship.setRotationAngle(2);			
-            spaceship.render();
-            spaceship.update();
+            //do nothing
             break;
 		case GLUT_KEY_DOWN:
-			// do something
+			// do nothing
 			break;
 		case GLUT_KEY_LEFT:
-			// do something
+			spaceship.setRotationAngle(.009);
 			break;
 		case GLUT_KEY_RIGHT:
-			// do something
+			spaceship.setRotationAngle(-.009);
 			break;
 		default:
 			break;
