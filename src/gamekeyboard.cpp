@@ -2,7 +2,7 @@
 #include "game.h"
 #include <GL/glut.h>
 
-void Game::keyHandler(unsigned char key, int x, int y) {
+void Game::keyDown(unsigned char key, int x, int y) {
 	switch(key) {
 		case 'q':
 		case 'Q':
@@ -17,7 +17,11 @@ void Game::keyHandler(unsigned char key, int x, int y) {
 	}
 }
 
-void Game::specialKeyHandler(int key, int x, int y) {
+void Game::keyUp(unsigned char key, int x, int y) {
+	// handle key release
+}
+
+void Game::specialKeyDown(int key, int x, int y) {
 	switch(key) {
 		case GLUT_KEY_UP:
             //do nothing
@@ -26,12 +30,17 @@ void Game::specialKeyHandler(int key, int x, int y) {
 			// do nothing
 			break;
 		case GLUT_KEY_LEFT:
-			spaceship.setRotationAngle(.009);
+			spaceship.setRotationAngle(0.1);
 			break;
 		case GLUT_KEY_RIGHT:
-			spaceship.setRotationAngle(-.009);
+			spaceship.setRotationAngle(-0.1);
 			break;
 		default:
 			break;
 	}
 }
+
+void Game::specialKeyUp(int key, int x, int y) {
+	// handle key release
+}
+

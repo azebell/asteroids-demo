@@ -16,8 +16,6 @@ public:
 	
 	std::vector<vec3> clipWindow; // clipping window
 
-	// TODO 
-	// add Ship object to game
     Spaceship spaceship;
 
 	// TODO 
@@ -33,10 +31,11 @@ public:
 	int checkClipping(Asteroid A);
 	void bustTest();
 
-	// function to handle keypresses relayed from glut
-	void keyHandler(unsigned char key, int x, int y);
-	// function to handle special keys (UP, LEFT, RIGHT, DOWN, etc.)
-	void specialKeyHandler(int key, int x, int y);
+	// functions to handle keypresses relayed from glut
+	void keyDown(unsigned char key, int x, int y);
+	void keyUp(unsigned char key, int x, int y);
+	void specialKeyDown(int key, int x, int y);
+	void specialKeyUp(int key, int x, int y);
 };
 
 #endif // GAME_H

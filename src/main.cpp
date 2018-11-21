@@ -33,13 +33,12 @@ void update( int value ) {
 }
 
 
-void keyboardRelay(unsigned char key, int x, int y) {
-	g.keyHandler(key, x, y);
-}
+// relay functions for key handling
+void keyDown(unsigned char key, int x, int y) { g.keyDown(key, x, y); }
+void specialKeyDown(int key, int x, int y) { g.specialKeyDown(key, x, y); }
+void keyUp(unsigned char key, int x, int y) { g.keyUp(key, x, y); }
+void specialKeyUp(int key, int x, int y) { g.specialKeyUp(key, x, y); }
 
-void specialkeyRelay(int key, int x, int y) {
-	g.specialKeyHandler(key, x, y);
-}
 
 int main(int argc, char** argv) {
 
@@ -56,9 +55,11 @@ int main(int argc, char** argv) {
 
 	g.init(WINDOW_MAX_X, WINDOW_MAX_Y, radius);
 
-	//glutMouseFunc(mouse);
-	glutKeyboardFunc(keyboardRelay);
-	glutSpecialFunc(specialkeyRelay); // key handler for arrow keys
+	glutKeyboardFunc(keyDown);
+	glutSpecialFunc(specialKeyDown);
+	glutKeyboardUpFunc(keyUp);
+	glutSpecialUpFunc(specialKeyUp);
+
 	glutDisplayFunc(display);
 	glutTimerFunc(FRAMERATE,update,0);
 	glutMainLoop();
