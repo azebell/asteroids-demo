@@ -1,3 +1,4 @@
+
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 
@@ -17,7 +18,6 @@ public:
 
 	Spaceship();
 	Spaceship(vec3 position);
-	void setRotationAngle(float angle);	
 	void update();
 	void render();
 };

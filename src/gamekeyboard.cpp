@@ -30,10 +30,10 @@ void Game::specialKeyDown(int key, int x, int y) {
 			// do nothing
 			break;
 		case GLUT_KEY_LEFT:
-			spaceship.setRotationAngle(0.1);
+			spaceship.alpha = 0.1;
 			break;
 		case GLUT_KEY_RIGHT:
-			spaceship.setRotationAngle(-0.1);
+			spaceship.alpha = -0.1;
 			break;
 		default:
 			break;
@@ -41,6 +41,15 @@ void Game::specialKeyDown(int key, int x, int y) {
 }
 
 void Game::specialKeyUp(int key, int x, int y) {
-	// handle key release
+	switch(key) {
+		case GLUT_KEY_LEFT:
+			spaceship.alpha = 0.0;
+			break;
+		case GLUT_KEY_RIGHT:
+			spaceship.alpha = 0.0;
+			break;
+		default:
+			break;
+	}
 }
 

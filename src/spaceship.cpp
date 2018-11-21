@@ -1,6 +1,5 @@
+
 #include "spaceship.h"
-#include <math.h>
-#include <cstdlib>
 #include "glFuncs.h"
 
 Spaceship::Spaceship() : Spaceship({0.0,0.0,0.0}) {
@@ -16,26 +15,14 @@ Spaceship::Spaceship(vec3 position) : pos(position) {
 	this->Tverts = verts;
 }
 
-void Spaceship::setRotationAngle(float angle){ 
-	if(alpha == 0)
-		this -> alpha = angle;
-	else{
-		alpha = 0;
-		angle = 0;
-	}
-}
-
 // update Spaceship with new rotation direction
 void Spaceship::update() {
-	
 	this->theta += this->alpha;
 
 	this->transform = mat4Identity();
 	mat4RotateZ(&this->transform, this->theta); 
 	mat4Translate(&this->transform, this->pos); 
 	this->Tverts = applyTransform(this->transform, this->verts);
-
-	this -> alpha = 0;
 }
 
 
