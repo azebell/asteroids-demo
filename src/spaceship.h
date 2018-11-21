@@ -7,18 +7,19 @@
 class Spaceship {
 private:
 public:
-    vec3 pos; // position
-    vec3 vel; // velocity
-    float theta; // rotation
-    float alpha; // rotational velocity
-    mat4 transform;
-    std::vector<vec3> verts; // polygon vertices
-    std::vector<vec3> Tverts; // transformed vertices
+	vec3 pos; // position
+	vec3 vel; // velocity
+	float theta; // rotation
+	float alpha; // rotational velocity
+	mat4 transform;
+	std::vector<vec3> verts; // polygon vertices
+	std::vector<vec3> Tverts; // transformed vertices
 
-    Spaceship();
-    void setRotationAngle(float angle);    
-    void update();
-    void render();
+	Spaceship();
+	Spaceship(vec3 position);
+	void setRotationAngle(float angle);	
+	void update();
+	void render();
 };
 
 #endif // SPACESHIP_H

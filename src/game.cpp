@@ -40,7 +40,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 		ang += PI/4.0;
 	}
 
-    Spaceship a;
+    this->spaceship.pos = origin;
 }
 
 void Game::update() {
