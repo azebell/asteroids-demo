@@ -2,7 +2,6 @@
 #include <math.h>
 #include <cstdlib>
 #include "glFuncs.h"
-#include <iostream>
 
 // creating Spaceship with specified geometry
 Spaceship::Spaceship(){
@@ -15,8 +14,7 @@ Spaceship::Spaceship(){
     this->Tverts = verts;
 }
 
-void Spaceship::setRotationAngle(float angle){
-    std::cout << "theta: " << theta << " angle: "<< angle << std::endl; 
+void Spaceship::setRotationAngle(float angle){ 
     if(alpha == 0)
         this -> alpha = angle;
     else{
