@@ -3,6 +3,7 @@
 #define GAME_H
 
 #include "asteroid.h"
+#include "spaceship.h"
 #include "zgeom.h"
 #include <vector>
 
@@ -17,6 +18,7 @@ public:
 
 	// TODO 
 	// add Ship object to game
+    Spaceship spaceship;
 
 	// TODO 
 	// add Bullets vector to game

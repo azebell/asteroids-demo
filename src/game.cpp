@@ -1,6 +1,7 @@
 
 #include "game.h"
 #include "asteroid.h"
+#include "spaceship.h"
 #include "bust.h"
 #include "zgeom.h"
 #include "glFuncs.h" // for rendering clipWindow
@@ -38,6 +39,8 @@ void Game::init(int window_width, int window_height, float octRadius) {
 		});
 		ang += PI/4.0;
 	}
+
+    Spaceship a;
 }
 
 void Game::update() {
@@ -68,6 +71,8 @@ void Game::render() {
 		asteroids[i].clip(this->clipWindow);
 		this->asteroids[i].render();
 	}
+    this->spaceship.update();
+    this->spaceship.render();
 	
 	swapBuffers();
 }
