@@ -1,8 +1,10 @@
-
 #ifndef GLFUNCS_H
 #define GLFUNCS_H
 
-#include <GL/glut.h>
+//#include <GL/glut.h>		//***moved to includeds.h
+
+#include "includes.h"
+#include "structs.h"
 
 void setupGlut( int wpx, int wpy, int wdx, int wdy );
 

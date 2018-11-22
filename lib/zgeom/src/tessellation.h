@@ -19,16 +19,14 @@ unsigned int tris_in_poly(unsigned int N);
 
 #include <vector>
 
-// return a list of triangle indices that refer to 
-// points in 'vertices'
-// (3 indices form a triangle)
-std::vector<int> triangulate(std::vector<vec3> vertices, int CCW);
+typedef enum WindingType {
+	CW_WINDING,
+	CCW_WINDING
+} WindingType;
 
-// triangulate list of vertices and return the tris
-std::vector<vec3> triangulate_verts(std::vector<vec3> vertices, int CCW);
-
-// return a list of triangle vertices specified by indices
-std::vector<vec3> tris_from_indices(std::vector<int> indices, std::vector<vec3> vertices);
+// triangulate list of vertices with 
+// the earclipping algorithm and return the tris
+std::vector<vec3> triangulate(std::vector<vec3> vertices, int CCW);
 
 #endif // __cplusplus
 

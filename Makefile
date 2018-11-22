@@ -5,14 +5,12 @@ INCDIR = include
 LIBDIR = lib
 BINDIR = bin
 
-CC = gcc
-CXX = g++
+CC       = gcc
+CXX      = g++
 CXXFLAGS = -std=c++11 -Wall -I$(INCDIR)
-LDLIBS =  -lglut -lGL -lGLU -lm -L$(LIBDIR) -lzgeom
+LDLIBS   = -lglut -lGL -lGLU -lm -L$(LIBDIR) -lzgeom
 
 SOURCES  := $(wildcard $(SRCDIR)/*.cpp)
-#SRCFILES  = vec.cpp intersect.cpp circle.cpp main.cpp
-#SOURCES  = $(SRCFILES:%.cpp=$(SRCDIR)/%.cpp)
 INCLUDES := $(wildcard $(SRCDIR)/*.h)
 OBJECTS  := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
@@ -21,11 +19,7 @@ TARGET = demo
 export LIBDEST = "$(shell pwd)/$(LIBDIR)"
 export INCLUDEDEST = "$(shell pwd)/$(INCDIR)"
 
-
 all: libzgeom $(BINDIR)/$(TARGET)
-
-trig: CXXFLAGS += -DTRIG
-trig: clean all
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
 	$(CXX) -o $@ $^ $(LDLIBS)

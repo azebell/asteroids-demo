@@ -16,47 +16,6 @@ int mp_circle_points(int r, int zoom) {
 }
 
 /////////////////////////////////////////////////
-// Generate a list of vertices using the midpoint circle algorithm.
-// Given a radius r and zoom factor, generate a vector of
-// circle points where the pixels are scaled according to zoom.
-/////////////////////////////////////////////////
-std::vector<vec3> midpoint_circle(vec3 c, int r, int zoom) {
-
-	int d = r*zoom;
-	std::vector<vec3> result(d*8);
-	float step = 1/(float)zoom;
-	float x = r - 1;
-	float y = 0;
-	float dx = 1;
-	float dy = 1;
-	float err = dx - (r << 1);
-	
-	for(int i=0; x >= y; i++) {
-		result[d*0 + i]     = {c.x + x, c.y + y};
-		result[d*1 + d-i-1] = {c.x + y, c.y + x}; // CW
-		result[d*2 + i]     = {c.x - y, c.y + x};
-		result[d*3 + d-i-1] = {c.x - x, c.y + y}; // CW
-		result[d*4 + i]     = {c.x - x, c.y - y};
-		result[d*5 + d-i-1] = {c.x - y, c.y - x}; // CW
-		result[d*6 + i]     = {c.x + y, c.y - x};
-		result[d*7 + d-i-1] = {c.x + x, c.y - y}; // CW
-	
-		if(err <= 0) {
-			y += 1*step;
-			err += dy;
-			dy += 2*step;
-		}
-	
-		else {
-			x -= 1*step;
-			dx += 2*step;
-			err += dx - (r << 1);
-		}
-	}
-	return result;
-}
-
-/////////////////////////////////////////////////
 // Generate a list of vertices along a circle centered at
 // point c with radius r, having d points per octant.
 /////////////////////////////////////////////////
@@ -149,54 +108,6 @@ std::vector<vec3> arc(vec3 p1, vec3 p2, float theta, int d) {
 			result.push_back(p2v);
 			break;
 		}
-		i++;
-	}
-
-	return result;
-}
-
-std::vector<vec3> midpoint_arc(vec3 p1, vec3 p2, float theta, float knife) {
-	std::vector<vec3> result;
-	if(theta > 360 || theta < 1)
-		return result;
-	float angle = theta*PI/180.0;
-
-	// vector from p1 to p2
-	vec3 chord = vec3Diff(p2, p1);
-	float hc = vec3Mag(chord)/2.0;
-
-	float r = vec3Mag(chord)/(2*sin(angle/2.0));
-	float h = sqrt(r*r - hc*hc);
-	if((int)theta%360 > 180)
-		h = -h;
-
-	vec3 center = vec3Scale(chord, 0.5);
-	vec3 height = vec3Unit(vec3Cross(center, {0.0,0.0,-1.0}));
-	height = vec3Scale(height, h);
-	center = vec3Sum(center, height);
-	center = vec3Sum(center, p1);
-
-	// get the circle, intersect with rays, keep the CCW arc
-	std::vector<vec3> circle = midpoint_circle(center, r, 1.0);
-
-	unsigned i = 0;
-	while(1) {
-		i = positive_modulo(i, circle.size());
-		if(circle[i].x < knife)
-			break;
-		i++;
-	}
-	while(1) {
-		i = positive_modulo(i, circle.size());
-		if(circle[i].x >= knife)
-			break;
-		i++;
-	}
-	while(1) {
-		i = positive_modulo(i, circle.size());
-		if(circle[i].x < knife)
-			break;
-		result.push_back(circle[i]);
 		i++;
 	}
 
