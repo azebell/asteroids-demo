@@ -10,4 +10,6 @@
 
 #define PI 3.14159265359
 
+#define SPACEBAR 32 // Defines the spacebar as ASCII key 32
+
 #endif

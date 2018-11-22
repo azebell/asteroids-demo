@@ -42,6 +42,9 @@ void mouse( int button, int state, int x, int y ) {
 
 void keyboard( unsigned char key, int x, int y ) {
 	switch(key) {
+		case SPACEBAR:
+			// missile(ShipTheta); TODO: Get sapceship theta
+			break;
 		case 'q':
 		case 'Q':
 			exit(0);
@@ -75,6 +78,7 @@ int main(int argc, char** argv) {
 
 	glutMouseFunc(mouse);
 	glutKeyboardFunc(keyboard);
+	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 	glutSpecialFunc(specialkeys); // key handler for arrow keys
 	glutDisplayFunc(gamemanager);
 	glutTimerFunc(FRAMERATE,update,0);
