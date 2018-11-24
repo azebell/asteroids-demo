@@ -8,6 +8,11 @@ void Game::keyDown(unsigned char key, int x, int y) {
 		case 'Q':
 			exit(0);
 			break;
+		case 32: // Spacebar
+			missiles.push_back(
+				Missile(this->spaceship.pos, this->spaceship.theta)
+			);
+			break;
 		case 'b':
 		case 'B':
 			this->bustTest();

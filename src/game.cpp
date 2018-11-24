@@ -2,12 +2,12 @@
 #include "game.h"
 #include "asteroid.h"
 #include "spaceship.h"
+#include "missile.h"
 #include "bust.h"
 #include "zgeom.h"
 #include "glFuncs.h" // for rendering clipWindow
 #include <vector>
 #include <cmath>
-#include <stdio.h>
 
 Game::Game() {
 
@@ -48,6 +48,11 @@ void Game::update() {
 	for(unsigned i=0; i<this->asteroids.size(); i++) {
 		this->asteroids[i].update();
 	}
+
+	// update each missile
+	for(unsigned i=0; i<this->missiles.size(); i++) {
+		this->missiles[i].update();
+	}
 }
 
 void Game::render() {
@@ -71,6 +76,13 @@ void Game::render() {
 		asteroids[i].clip(this->clipWindow);
 		this->asteroids[i].render();
 	}
+
+	// Draw the missiles
+	for(unsigned i=0; i < this->missiles.size(); i++) {
+		this->missiles[i].render();
+	}
+
+	// Draw the Spaceship
     this->spaceship.update();
     this->spaceship.render();
 	

@@ -59,6 +59,7 @@ int main(int argc, char** argv) {
 	glutSpecialFunc(specialKeyDown);
 	glutKeyboardUpFunc(keyUp);
 	glutSpecialUpFunc(specialKeyUp);
+	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 
 	glutDisplayFunc(display);
 	glutTimerFunc(FRAMERATE,update,0);

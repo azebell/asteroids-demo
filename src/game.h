@@ -4,6 +4,7 @@
 
 #include "asteroid.h"
 #include "spaceship.h"
+#include "missile.h"
 #include "zgeom.h"
 #include <vector>
 
@@ -18,8 +19,7 @@ public:
 
     Spaceship spaceship;
 
-	// TODO 
-	// add Bullets vector to game
+	std::vector<Missile> missiles;
 
 	// TODO 
 	// add Scoreboard object to game
