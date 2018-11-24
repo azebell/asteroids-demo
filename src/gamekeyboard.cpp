@@ -13,10 +13,6 @@ void Game::keyDown(unsigned char key, int x, int y) {
 				Missile(this->spaceship.pos, this->spaceship.theta)
 			);
 			break;
-		case 'b':
-		case 'B':
-			this->bustTest();
-			break;
 		default:
 			break;
 	}

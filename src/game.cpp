@@ -57,6 +57,8 @@ void Game::update() {
 			i--;
 		}
 	}
+
+	this->resolveCollisions();
 }
 
 void Game::render() {
@@ -93,13 +95,6 @@ void Game::render() {
 	swapBuffers();
 }
 
-void Game::bustTest() {
-	std::vector<Asteroid> bustRoids = bustTris(asteroids[0]);
-	this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
-	this->asteroids.erase(this->asteroids.begin());
-	return;
-}
-
 //int Game::checkClipping(Asteroid A) {
 int Game::checkClipping(std::vector<vec3> vertices) {
 	unsigned outside = 0;
@@ -111,5 +106,20 @@ int Game::checkClipping(std::vector<vec3> vertices) {
 	if(outside == vertices.size())
 		return -1; // completely outside
 	return outside; // 0 if fully inside
+}
+
+void Game::resolveCollisions() {
+	for(unsigned k=0; k<this->missiles.size(); k++) {
+		for(unsigned i=0; i<this->asteroids.size(); i++) {
+			if(point_in_poly(missiles[k].Tverts[1], this->asteroids[i].Tverts)) {
+				std::vector<Asteroid> bustRoids = bust(asteroids[i]);
+				this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
+				this->asteroids.erase(this->asteroids.begin()+i);
+				this->missiles.erase(missiles.begin()+k);
+				k--;
+				break;
+			}
+		}
+	}
 }
 
