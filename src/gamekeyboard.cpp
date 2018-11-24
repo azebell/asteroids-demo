@@ -4,12 +4,14 @@
 
 void Game::keyDown(unsigned char key, int x, int y) {
 	switch(key) {
-		case 32: // Spacebar
-			missiles.push_back( missile(this->spaceship.theta) );
-		break;
 		case 'q':
 		case 'Q':
 			exit(0);
+			break;
+		case 32: // Spacebar
+			missiles.push_back(
+				Missile(this->spaceship.pos, this->spaceship.theta)
+			);
 			break;
 		case 'b':
 		case 'B':

@@ -8,7 +8,6 @@
 #include "glFuncs.h" // for rendering clipWindow
 #include <vector>
 #include <cmath>
-#include <stdio.h>
 
 Game::Game() {
 
@@ -50,7 +49,7 @@ void Game::update() {
 		this->asteroids[i].update();
 	}
 
-	// update each amissile
+	// update each missile
 	for(unsigned i=0; i<this->missiles.size(); i++) {
 		this->missiles[i].update();
 	}
@@ -80,12 +79,6 @@ void Game::render() {
 
 	// Draw the missiles
 	for(unsigned i=0; i < this->missiles.size(); i++) {
-		int clip = this->checkClipping( this->missiles[i] );
-		if(clip == -1) {
-			missiles[i].pos = 2*origin - missiles[i].pos;
-			missiles[i].update();
-		}
-		missiles[i].clip(this->clipWindow);
 		this->missiles[i].render();
 	}
 
@@ -115,14 +108,3 @@ int Game::checkClipping(Asteroid A) {
 	return outside; // 0 if fully inside
 }
 
-int Game::checkClipping(missile M) {
-	unsigned outside = 0;
-	for(unsigned i=0; i<M.Tverts.size(); i++) {
-		if(!point_in_poly(M.Tverts[i], this->clipWindow)) {
-			outside += 1;
-		}
-	}
-	if(outside == M.Tverts.size())
-		return -1; // completely outside
-	return outside; // 0 if fully inside
-}

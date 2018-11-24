@@ -19,7 +19,7 @@ public:
 
     Spaceship spaceship;
 
-	std::vector<missile> missiles;
+	std::vector<Missile> missiles;
 
 	// TODO 
 	// add Scoreboard object to game
@@ -29,7 +29,6 @@ public:
 	void update();
 	void render();
 	int checkClipping(Asteroid A);
-	int checkClipping(missile M);
 	void bustTest();
 
 	// functions to handle keypresses relayed from glut
