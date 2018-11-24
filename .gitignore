@@ -1,0 +1,12 @@
+*
+
+!*.c
+!*.cpp
+!*.h
+!Makefile
+!makefile
+!README.md
+!.gitignore
+!.gitkeep
+
+!*/
