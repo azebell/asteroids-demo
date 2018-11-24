@@ -15,7 +15,7 @@ Missile::Missile(vec3 position, float angle)
 	};
 	this->vel = 5*vec3Unit(velocity);
 	this->verts.push_back( { 0.0, 0.0, 0.0 } );
-	this->verts.push_back( { 2.0, 2.0, 0.0 } );
+	this->verts.push_back( { 10.0, 0.0, 0.0 } );
 	this->Tverts = verts;
 }
 
