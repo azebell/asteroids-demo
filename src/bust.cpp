@@ -61,6 +61,11 @@ std::vector<Asteroid> bustBarycentric(Asteroid A) {
 	std::vector<Asteroid> result;
 
 	// TODO create the barycentric tris
+	// since each previously busted asteroid turns
+	// into triangles with their centers at their
+	// relative origin, we simply need to bust these
+	// asteroids by creating triangles with each edge
+	// and two lines connecting it to the origin.
 
 	return result;
 }
