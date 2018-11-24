@@ -1,11 +1,11 @@
 
-#ifndef ASTEROID_H
-#define ASTEROID_H
+#ifndef SPACESHIP_H
+#define SPACESHIP_H
 
 #include "zgeom.h"
 #include <vector>
 
-class Asteroid {
+class Spaceship {
 private:
 public:
 	vec3 pos; // position
@@ -16,21 +16,11 @@ public:
 	std::vector<vec3> verts; // polygon vertices
 	std::vector<vec3> Tverts; // transformed vertices
 
-	enum AsteroidType {
-		POLYROID,
-		TRIROID,
-		BARYROID
-	};
-
-	AsteroidType type;
-
-	Asteroid(vec3 position, float radius);
-	Asteroid(vec3 position, std::vector<vec3> vertices);
-	void transformVerts();
-	void clip(std::vector<vec3> clipper);
+	Spaceship();
+	Spaceship(vec3 position);
 	void update();
 	void render();
 };
 
-#endif // ASTEROID_H
+#endif // SPACESHIP_H
 

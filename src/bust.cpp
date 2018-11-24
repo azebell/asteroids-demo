@@ -1,7 +1,19 @@
 
+#include "bust.h"
 #include "asteroid.h"
 #include "zgeom.h"
 #include <vector>
+
+std::vector<Asteroid> bust(Asteroid A) {
+	if(A.type == Asteroid::POLYROID) {
+		return bustTris(A);
+	}
+	else if(A.type == Asteroid::TRIROID) {
+		// TODO call bustBarycentric function
+		return std::vector<Asteroid>();
+	}
+	return std::vector<Asteroid>();
+}
 
 std::vector<Asteroid> bustTris(Asteroid A) {
 	std::vector<Asteroid> result;
@@ -41,6 +53,14 @@ std::vector<Asteroid> bustTris(Asteroid A) {
 		tmp.update();
 		result.push_back(tmp);
 	}
+
+	return result;
+}
+
+std::vector<Asteroid> bustBarycentric(Asteroid A) {
+	std::vector<Asteroid> result;
+
+	// TODO create the barycentric tris
 
 	return result;
 }

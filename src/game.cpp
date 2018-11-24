@@ -1,6 +1,8 @@
 
 #include "game.h"
 #include "asteroid.h"
+#include "spaceship.h"
+#include "missile.h"
 #include "bust.h"
 #include "zgeom.h"
 #include "glFuncs.h" // for rendering clipWindow
@@ -38,6 +40,8 @@ void Game::init(int window_width, int window_height, float octRadius) {
 		});
 		ang += PI/4.0;
 	}
+
+    this->spaceship.pos = origin;
 }
 
 void Game::update() {
@@ -68,19 +72,30 @@ void Game::render() {
 		asteroids[i].clip(this->clipWindow);
 		this->asteroids[i].render();
 	}
+
+	// Draw the missiles
+	for(unsigned i=0; i < this->missiles.size(); i++) {
+		int clip = this->checkClipping( this->missiles[i] );
+		if(clip == -1) {
+			missiles[i].pos = 2*origin - missiles[i].pos;
+			missiles[i].update();
+		}
+		missiles[i].clip(this->clipWindow);
+		this->missiles[i].render();
+	}
+
+	// Draw the Spaceship
+    this->spaceship.update();
+    this->spaceship.render();
 	
 	swapBuffers();
 }
 
 void Game::bustTest() {
-	for(unsigned i=0; i<asteroids.size(); i++) {
-		if(asteroids[i].type == Asteroid::POLYROID) {
-			std::vector<Asteroid> bustRoids = bustTris(asteroids[i]);
-			this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
-			this->asteroids.erase(this->asteroids.begin()+i);
-			return;
-		}
-	}
+	std::vector<Asteroid> bustRoids = bustTris(asteroids[0]);
+	this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
+	this->asteroids.erase(this->asteroids.begin());
+	return;
 }
 
 int Game::checkClipping(Asteroid A) {
@@ -95,3 +110,14 @@ int Game::checkClipping(Asteroid A) {
 	return outside; // 0 if fully inside
 }
 
+int Game::checkClipping(missile M) {
+	unsigned outside = 0;
+	for(unsigned i=0; i<M.Tverts.size(); i++) {
+		if(!point_in_poly(M.Tverts[i], this->clipWindow)) {
+			outside += 1;
+		}
+	}
+	if(outside == M.Tverts.size())
+		return -1; // completely outside
+	return outside; // 0 if fully inside
+}

@@ -3,6 +3,8 @@
 #define GAME_H
 
 #include "asteroid.h"
+#include "spaceship.h"
+#include "missile.h"
 #include "zgeom.h"
 #include <vector>
 
@@ -15,11 +17,9 @@ public:
 	
 	std::vector<vec3> clipWindow; // clipping window
 
-	// TODO 
-	// add Ship object to game
+    Spaceship spaceship;
 
-	// TODO 
-	// add Bullets vector to game
+	std::vector<missile> missiles;
 
 	// TODO 
 	// add Scoreboard object to game
@@ -29,7 +29,14 @@ public:
 	void update();
 	void render();
 	int checkClipping(Asteroid A);
+	int checkClipping(missile M);
 	void bustTest();
+
+	// functions to handle keypresses relayed from glut
+	void keyDown(unsigned char key, int x, int y);
+	void keyUp(unsigned char key, int x, int y);
+	void specialKeyDown(int key, int x, int y);
+	void specialKeyUp(int key, int x, int y);
 };
 
 #endif // GAME_H

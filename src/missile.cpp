@@ -2,16 +2,16 @@
 #include "glFuncs.h"
 #include "zgeom.h"
 #include "missile.h"
-#include "constants.h"
 
 /* Defines a missile as a line spawned from the center of the window which
  * Is rotated by the same degree as the player ship
 */
 missile::missile(float ShipTheta) {
-	this->vel = 25.0; // Missile travels at a set scalar velocity
-	this->theta = ShipTheta;
-	this->verts.push_back( {WINDOW_MAX_X/2, WINDOW_MAX_X/2, 0.0} );
-	this->verts.push_back( {WINDOW_MAX_X/2, WINDOW_MAX_X/2, 0.0} );
+	float PI = 3.14159265359;
+	this->theta = (ShipTheta*PI);
+	this->vel = { (25*this->theta), (25*this->theta), 0.0 };
+	this->verts.push_back( { (1000/2), (1000/2), 0.0 } );
+	this->verts.push_back( { (1000/2)+10, (1000/2)+10, 0.0 } );
 	this->Tverts = verts;
 }
 
