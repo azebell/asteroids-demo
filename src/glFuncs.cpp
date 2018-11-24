@@ -4,7 +4,7 @@
 void setupGlut( int wpx, int wpy, int wdx, int wdy ) {
 	// pass dummy args to glutInit
 	int myargc = 0;
-	char **myargv;
+	char *myargv[1] = {(char*)"blank"};
 	glutInit(&myargc, myargv);
 
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
