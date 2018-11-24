@@ -49,6 +49,11 @@ void Game::update() {
 	for(unsigned i=0; i<this->asteroids.size(); i++) {
 		this->asteroids[i].update();
 	}
+
+	// update each amissile
+	for(unsigned i=0; i<this->missiles.size(); i++) {
+		this->missiles[i].update();
+	}
 }
 
 void Game::render() {
