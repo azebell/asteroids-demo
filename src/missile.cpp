@@ -10,8 +10,8 @@ missile::missile(float ShipTheta) {
 	float PI = 3.14159265359;
 	this->theta = (ShipTheta*PI);
 	this->vel = { (25*this->theta), (25*this->theta), 0.0 };
-	this->verts.push_back( { (1000/2), (1000/2), 0.0 } );
-	this->verts.push_back( { (1000/2)+10, (1000/2)+10, 0.0 } );
+	this->verts.push_back( { (500), (500), 0.0 } );
+	this->verts.push_back( { (500)+10, (500)+10, 0.0 } );
 	this->Tverts = verts;
 }
 
@@ -40,7 +40,7 @@ void missile::update() {
 // Draws the missile to screen
 void missile::render() {
 	glBegin(GL_LINE);
-	glVertex3f(this->Tverts[0].x, this->Tverts[1].y, 0.0);
-	glVertex3f(this->Tverts[0].x, this->Tverts[1].y, 0.0);
+	glVertex3f(this->Tverts[0].x, this->Tverts[0].y, 0.0);
+	glVertex3f(this->Tverts[1].x, this->Tverts[1].y, 0.0);
 	glEnd();
 }
