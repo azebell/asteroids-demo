@@ -12,13 +12,10 @@ class Game {
 private:
 public:
 	vec3 origin; // will be the center of octagon
-
-	std::vector<Asteroid> asteroids;
-	
 	std::vector<vec3> clipWindow; // clipping window
 
+	std::vector<Asteroid> asteroids;
     Spaceship spaceship;
-
 	std::vector<Missile> missiles;
 
 	// TODO 
@@ -28,7 +25,7 @@ public:
 	void init(int window_width, int window_height, float octRadius);
 	void update();
 	void render();
-	int checkClipping(Asteroid A);
+	int checkClipping(std::vector<vec3> vertices);
 	void bustTest();
 
 	// functions to handle keypresses relayed from glut

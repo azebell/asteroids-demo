@@ -52,6 +52,10 @@ void Game::update() {
 	// update each missile
 	for(unsigned i=0; i<this->missiles.size(); i++) {
 		this->missiles[i].update();
+		if( checkClipping(this->missiles[i].Tverts) ) {
+			this->missiles.erase(missiles.begin()+i);
+			i--;
+		}
 	}
 }
 
@@ -68,7 +72,7 @@ void Game::render() {
 
 	// draw the asteroids
 	for(unsigned i=0; i < this->asteroids.size(); i++) {
-		int clip = this->checkClipping( this->asteroids[i] );
+		int clip = this->checkClipping( this->asteroids[i].Tverts );
 		if(clip == -1) {
 			asteroids[i].pos = 2*origin - asteroids[i].pos;
 			asteroids[i].update();
@@ -96,14 +100,15 @@ void Game::bustTest() {
 	return;
 }
 
-int Game::checkClipping(Asteroid A) {
+//int Game::checkClipping(Asteroid A) {
+int Game::checkClipping(std::vector<vec3> vertices) {
 	unsigned outside = 0;
-	for(unsigned i=0; i<A.Tverts.size(); i++) {
-		if(!point_in_poly(A.Tverts[i], this->clipWindow)) {
+	for(unsigned i=0; i<vertices.size(); i++) {
+		if(!point_in_poly(vertices[i], this->clipWindow)) {
 			outside += 1;
 		}
 	}
-	if(outside == A.Tverts.size())
+	if(outside == vertices.size())
 		return -1; // completely outside
 	return outside; // 0 if fully inside
 }
