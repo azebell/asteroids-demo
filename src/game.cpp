@@ -58,6 +58,9 @@ void Game::update() {
 		}
 	}
 
+	// update the spaceship
+    this->spaceship.update();
+
 	this->resolveCollisions();
 }
 
@@ -89,7 +92,6 @@ void Game::render() {
 	}
 
 	// Draw the Spaceship
-    this->spaceship.update();
     this->spaceship.render();
 	
 	swapBuffers();

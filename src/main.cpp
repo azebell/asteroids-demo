@@ -21,14 +21,25 @@ const int WINDOW_MAX_Y = 1000;
 const int FRAMERATE = 1000.0/60.0;
 
 Game g;
+int currTime;
+int accumulator; // holds consumable simulation time (ms)
 
 void display( void ) {
 	g.render();
 }
 
-void update( int value ) {
-	glutTimerFunc(FRAMERATE,update,0);
-	g.update();
+//void update( int value ) {
+void update( void ) {
+	//glutTimerFunc(FRAMERATE,update,0);
+	int nt = glutGet(GLUT_ELAPSED_TIME);
+	int ft = nt - currTime; // frame time
+	currTime = nt;
+
+	accumulator += ft;
+	while(accumulator >= FRAMERATE) {
+		g.update();
+		accumulator -= FRAMERATE;
+	}
 	display();
 }
 
@@ -61,8 +72,11 @@ int main(int argc, char** argv) {
 	glutSpecialUpFunc(specialKeyUp);
 	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 
+	currTime = 0;
+	accumulator = 0;
 	glutDisplayFunc(display);
-	glutTimerFunc(FRAMERATE,update,0);
+	//glutTimerFunc(FRAMERATE,update,0);
+	glutIdleFunc(update);
 	glutMainLoop();
 }
 
