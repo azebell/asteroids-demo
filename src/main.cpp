@@ -28,9 +28,7 @@ void display( void ) {
 	g.render();
 }
 
-//void update( int value ) {
 void update( void ) {
-	//glutTimerFunc(FRAMERATE,update,0);
 	int nt = glutGet(GLUT_ELAPSED_TIME);
 	int ft = nt - currTime; // frame time
 	currTime = nt;
@@ -65,6 +63,8 @@ int main(int argc, char** argv) {
 		radius = atof(argv[1])/2.0;
 
 	g.init(WINDOW_MAX_X, WINDOW_MAX_Y, radius);
+	currTime = 0;
+	accumulator = 0;
 
 	glutKeyboardFunc(keyDown);
 	glutSpecialFunc(specialKeyDown);
@@ -72,10 +72,7 @@ int main(int argc, char** argv) {
 	glutSpecialUpFunc(specialKeyUp);
 	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 
-	currTime = 0;
-	accumulator = 0;
 	glutDisplayFunc(display);
-	//glutTimerFunc(FRAMERATE,update,0);
 	glutIdleFunc(update);
 	glutMainLoop();
 }
