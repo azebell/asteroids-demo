@@ -44,6 +44,17 @@ void Game::init(int window_width, int window_height, float octRadius) {
 }
 
 void Game::update() {
+	// update each missile
+	for(unsigned i=0; i<this->missiles.size(); i++) {
+		this->missiles[i].update();
+		if( checkClipping(this->missiles[i].Tverts) ) {
+			this->missiles.erase(missiles.begin()+i);
+			i--;
+		}
+	}
+
+	this->resolveCollisions();
+
 	// update each asteroid
 	for(unsigned i=0; i<this->asteroids.size(); i++) {
 		this->asteroids[i].update();
@@ -55,19 +66,8 @@ void Game::update() {
 		asteroids[i].clip(this->clipWindow);
 	}
 
-	// update each missile
-	for(unsigned i=0; i<this->missiles.size(); i++) {
-		this->missiles[i].update();
-		if( checkClipping(this->missiles[i].Tverts) ) {
-			this->missiles.erase(missiles.begin()+i);
-			i--;
-		}
-	}
-
 	// update the spaceship
     this->spaceship.update();
-
-	this->resolveCollisions();
 }
 
 void Game::render() {
