@@ -47,6 +47,12 @@ void Game::update() {
 	// update each asteroid
 	for(unsigned i=0; i<this->asteroids.size(); i++) {
 		this->asteroids[i].update();
+		int clip = this->checkClipping( this->asteroids[i].Tverts );
+		if(clip == -1) {
+			asteroids[i].pos = 2*origin - asteroids[i].pos;
+			asteroids[i].update();
+		}
+		asteroids[i].clip(this->clipWindow);
 	}
 
 	// update each missile
@@ -77,12 +83,6 @@ void Game::render() {
 
 	// draw the asteroids
 	for(unsigned i=0; i < this->asteroids.size(); i++) {
-		int clip = this->checkClipping( this->asteroids[i].Tverts );
-		if(clip == -1) {
-			asteroids[i].pos = 2*origin - asteroids[i].pos;
-			asteroids[i].update();
-		}
-		asteroids[i].clip(this->clipWindow);
 		this->asteroids[i].render();
 	}
 
