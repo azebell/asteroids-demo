@@ -1,12 +1,13 @@
 
 #include "game.h"
 #include "asteroid.h"
+#include "spaceship.h"
+#include "missile.h"
 #include "bust.h"
 #include "zgeom.h"
 #include "glFuncs.h" // for rendering clipWindow
 #include <vector>
 #include <cmath>
-#include <stdio.h>
 
 Game::Game() {
 
@@ -38,13 +39,35 @@ void Game::init(int window_width, int window_height, float octRadius) {
 		});
 		ang += PI/4.0;
 	}
+
+    this->spaceship.pos = origin;
 }
 
 void Game::update() {
+	// update each missile
+	for(unsigned i=0; i<this->missiles.size(); i++) {
+		this->missiles[i].update();
+		if( checkClipping(this->missiles[i].Tverts) ) {
+			this->missiles.erase(missiles.begin()+i);
+			i--;
+		}
+	}
+
+	this->resolveCollisions();
+
 	// update each asteroid
 	for(unsigned i=0; i<this->asteroids.size(); i++) {
 		this->asteroids[i].update();
+		int clip = this->checkClipping( this->asteroids[i].Tverts );
+		if(clip == -1) {
+			asteroids[i].pos = 2*origin - asteroids[i].pos;
+			asteroids[i].update();
+		}
+		asteroids[i].clip(this->clipWindow);
 	}
+
+	// update the spaceship
+    this->spaceship.update();
 }
 
 void Game::render() {
@@ -60,38 +83,45 @@ void Game::render() {
 
 	// draw the asteroids
 	for(unsigned i=0; i < this->asteroids.size(); i++) {
-		int clip = this->checkClipping( this->asteroids[i] );
-		if(clip == -1) {
-			asteroids[i].pos = 2*origin - asteroids[i].pos;
-			asteroids[i].update();
-		}
-		asteroids[i].clip(this->clipWindow);
 		this->asteroids[i].render();
 	}
+
+	// Draw the missiles
+	for(unsigned i=0; i < this->missiles.size(); i++) {
+		this->missiles[i].render();
+	}
+
+	// Draw the Spaceship
+    this->spaceship.render();
 	
 	swapBuffers();
 }
 
-void Game::bustTest() {
-	for(unsigned i=0; i<asteroids.size(); i++) {
-		if(asteroids[i].type == Asteroid::POLYROID) {
-			std::vector<Asteroid> bustRoids = bustTris(asteroids[i]);
-			this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
-			this->asteroids.erase(this->asteroids.begin()+i);
-			return;
-		}
-	}
-}
-
-int Game::checkClipping(Asteroid A) {
+//int Game::checkClipping(Asteroid A) {
+int Game::checkClipping(std::vector<vec3> vertices) {
 	unsigned outside = 0;
-	for(unsigned i=0; i<A.Tverts.size(); i++) {
-		if(!point_in_poly(A.Tverts[i], this->clipWindow)) {
+	for(unsigned i=0; i<vertices.size(); i++) {
+		if(!point_in_poly(vertices[i], this->clipWindow)) {
 			outside += 1;
 		}
 	}
-	if(outside == A.Tverts.size())
+	if(outside == vertices.size())
 		return -1; // completely outside
 	return outside; // 0 if fully inside
+}
+
+void Game::resolveCollisions() {
+	for(unsigned k=0; k<this->missiles.size(); k++) {
+		for(unsigned i=0; i<this->asteroids.size(); i++) {
+			if(point_in_poly(missiles[k].Tverts[1], this->asteroids[i].Tverts)) {
+				std::vector<Asteroid> bustRoids = bust(asteroids[i]);
+				this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
+				this->asteroids.erase(this->asteroids.begin()+i);
+				this->missiles.erase(missiles.begin()+k);
+				k--;
+				break;
+			}
+		}
+	}
 }
 

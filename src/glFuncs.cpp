@@ -1,16 +1,10 @@
-/*
-#include <string.h>	//***moved to includes.h
-*/
 
-#include "includes.h"
-#include "structs.h"
 #include "glFuncs.h"
 
 void setupGlut( int wpx, int wpy, int wdx, int wdy ) {
 	// pass dummy args to glutInit
-	int myargc = 1;
-	char *myargv[1];
-	myargv[0] = strdup("empty-arg");
+	int myargc = 0;
+	char *myargv[1] = {(char*)"blank"};
 	glutInit(&myargc, myargv);
 
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
