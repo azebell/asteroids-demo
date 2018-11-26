@@ -28,6 +28,9 @@ typedef enum WindingType {
 // the earclipping algorithm and return the tris
 std::vector<vec3> triangulate(std::vector<vec3> vertices, int CCW);
 
+// get the area of a triangulated polygon
+float area_of_tris(std::vector<vec3> tris);
+
 #endif // __cplusplus
 
 #endif // TESSELLATION_H
