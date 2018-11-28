@@ -55,6 +55,10 @@ void Asteroid::clip(std::vector<vec3> clipper) {
 	this->Tverts = clip_sh(this->Tverts, clipper);
 }
 
+void Asteroid::setDrawStyle(DrawStyle ds) {
+	this->drawstyle = ds;
+}
+
 void Asteroid::update() {
 	this->pos.x += this->vel.x;
 	this->pos.y += this->vel.y;
@@ -65,11 +69,34 @@ void Asteroid::update() {
 }
 
 void Asteroid::render() {
-	// draw the asteroid
-	glBegin(GL_LINE_LOOP);
-	for(unsigned i=0; i < this->Tverts.size(); i++) {
-		glVertex3f(this->Tverts[i].x, this->Tverts[i].y, 0.0);
+	
+	std::vector<vec3> tris;
+	if(this->drawstyle == FILLED || this->drawstyle == TRIANGLES)
+		tris = triangulate(this->Tverts, CCW_WINDING);
+	switch(this->drawstyle) {
+		case OUTLINE:
+			// draw the asteroid
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			glBegin(GL_LINE_LOOP);
+			for(unsigned i=0; i < this->Tverts.size(); i++) {
+				glVertex3f(this->Tverts[i].x, this->Tverts[i].y, 0.0);
+			}
+			glEnd();
+			break;
+		case FILLED:
+			// draw the asteroid
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			glBegin(GL_TRIANGLES);
+			for(unsigned i=0; i < tris.size(); i++) {
+				glVertex3f(tris[i].x, tris[i].y, 0.0);
+			}
+			glEnd();
+			break;
+		case TRIANGLES:
+			break;
+		default:
+			break;
 	}
-	glEnd();
+	this->drawstyle = OUTLINE;
 }
 

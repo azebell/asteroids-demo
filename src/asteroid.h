@@ -21,13 +21,20 @@ public:
 		TRIROID,
 		BARYROID
 	};
+	enum DrawStyle {
+		OUTLINE,
+		FILLED,
+		TRIANGLES
+	};
 
 	AsteroidType type;
+	DrawStyle drawstyle;
 
 	Asteroid(vec3 position, float radius);
 	Asteroid(vec3 position, std::vector<vec3> vertices);
 	void transformVerts();
 	void clip(std::vector<vec3> clipper);
+	void setDrawStyle(DrawStyle ds);
 	void update();
 	void render();
 };

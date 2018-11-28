@@ -27,6 +27,7 @@ public:
 	void render();
 	int checkClipping(std::vector<vec3> vertices);
 	void resolveCollisions();
+	void resolveOverlaps();
 
 	// functions to handle keypresses relayed from glut
 	void keyDown(unsigned char key, int x, int y);

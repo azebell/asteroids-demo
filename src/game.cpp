@@ -54,6 +54,7 @@ void Game::update() {
 	}
 
 	this->resolveCollisions();
+	this->resolveOverlaps();
 
 	// update each asteroid
 	for(unsigned i=0; i<this->asteroids.size(); i++) {
@@ -65,6 +66,7 @@ void Game::update() {
 		}
 		asteroids[i].clip(this->clipWindow);
 	}
+
 
 	// update the spaceship
     this->spaceship.update();
@@ -120,6 +122,23 @@ void Game::resolveCollisions() {
 				this->missiles.erase(missiles.begin()+k);
 				k--;
 				break;
+			}
+		}
+	}
+}
+
+void Game::resolveOverlaps() {
+	for(unsigned i=0; i<this->asteroids.size(); i++) {
+		for(unsigned j=0; j<this->asteroids.size(); j++) {
+			if(i==j)
+				continue;
+			if(poly_intersect(asteroids[i].Tverts, asteroids[j].Tverts)) {
+				float A1 = area_of_tris(asteroids[i].verts);
+				float A2 = area_of_tris(asteroids[j].verts);
+				if(A1 < A2)
+					asteroids[i].setDrawStyle(Asteroid::FILLED);
+				else
+					asteroids[j].setDrawStyle(Asteroid::FILLED);
 			}
 		}
 	}
