@@ -78,3 +78,11 @@ int point_in_poly(vec3 p, std::vector<vec3> poly) {
 	return point_in_poly(p, &poly[0], poly.size());
 }
 
+int poly_intersect(std::vector<vec3> A, std::vector<vec3> B) {
+	for(unsigned i=0; i<A.size(); i++) {
+		if(point_in_poly(A[i], B))
+			return 1;
+	}
+	return 0;
+}
+
