@@ -79,7 +79,7 @@ float area_of_tris(std::vector<vec3> tris) {
 	float area = 0.0, A;
 	for(unsigned i=0; i<tris.size(); i+=3) {
 		A = tri_area(tris[i], tris[i+1], tris[i+2]);
-		area += (A>0) ? A: -A;
+		area += (A>=0) ? A : -A;
 	}
 	return area;
 }

@@ -67,7 +67,6 @@ void Game::update() {
 	}
 
 	this->resolveOverlaps();
-
 	// update the spaceship
     this->spaceship.update();
 }
