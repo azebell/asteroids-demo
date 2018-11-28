@@ -31,6 +31,7 @@ pos(position) {
 	}
 	this->Tverts = verts;
 	this->type = Asteroid::POLYROID;
+	this->drawstyle = OUTLINE;
 }
 
 // creating Asteroid with predefined geometry
@@ -42,6 +43,7 @@ pos(position), verts(vertices) {
 
 	this->Tverts = verts;
 	this->type = Asteroid::POLYROID;
+	this->drawstyle = OUTLINE;
 }
 
 void Asteroid::transformVerts() {
@@ -66,6 +68,7 @@ void Asteroid::update() {
 	this->theta += this->alpha;
 
 	this->transformVerts();
+	this->drawstyle = OUTLINE;
 }
 
 void Asteroid::render() {
@@ -97,6 +100,5 @@ void Asteroid::render() {
 		default:
 			break;
 	}
-	this->drawstyle = OUTLINE;
 }
 

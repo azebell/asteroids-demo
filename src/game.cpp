@@ -54,7 +54,6 @@ void Game::update() {
 	}
 
 	this->resolveCollisions();
-	this->resolveOverlaps();
 
 	// update each asteroid
 	for(unsigned i=0; i<this->asteroids.size(); i++) {
@@ -67,6 +66,7 @@ void Game::update() {
 		asteroids[i].clip(this->clipWindow);
 	}
 
+	this->resolveOverlaps();
 
 	// update the spaceship
     this->spaceship.update();
