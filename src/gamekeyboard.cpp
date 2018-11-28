@@ -1,9 +1,21 @@
-
+#include "gameState.h"
 #include "game.h"
 #include <GL/glut.h>
 
 void Game::keyDown(unsigned char key, int x, int y) {
 	switch(key) {
+		case 's':
+		case 'S':
+			break;
+		case 'p':
+		case 'P':
+			displayText("Paused");
+			break;
+
+		case 't':
+		case 'T':
+			break;
+		
 		case 'q':
 		case 'Q':
 			exit(0);
