@@ -19,7 +19,7 @@ void drawString(float x, float y, void *font, const char* string)
     //position text on screen
     glRasterPos2f(x, y);
     //loop to store current char of string in char defined earlier and add it using glutBitmapCharacter()
-    for(c=string; *c!='/0'; c++)
+    for(c=string; *c!='\0'; c++)
     {
 	glutBitmapCharacter(font, *c);
     }
