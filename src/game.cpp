@@ -4,10 +4,12 @@
 #include "spaceship.h"
 #include "missile.h"
 #include "bust.h"
+#include "scoreboard.h"
 #include "zgeom.h"
 #include "glFuncs.h" // for rendering clipWindow
 #include <vector>
 #include <cmath>
+
 
 Game::Game() {
 
@@ -39,6 +41,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 		});
 		ang += PI/4.0;
 	}
+
 
     this->spaceship.pos = origin;
 }
@@ -75,6 +78,8 @@ void Game::render() {
 
 	clearScreen();
 
+	glColor3ub(255,255,255);
+
 	// draw the clipping window
 	glBegin(GL_LINE_LOOP);
 	for(unsigned i=0; i < this->clipWindow.size(); i++) {
@@ -95,6 +100,9 @@ void Game::render() {
 	// Draw the Spaceship
     this->spaceship.render();
 	
+	//Draw Scoreboard
+	drawScoreboard();
+
 	swapBuffers();
 }
 

@@ -72,6 +72,7 @@ void Asteroid::update() {
 }
 
 void Asteroid::render() {
+	glColor3ub(255,255,255);
 	
 	std::vector<vec3> tris;
 	if(this->drawstyle == FILLED || this->drawstyle == TRIANGLES)

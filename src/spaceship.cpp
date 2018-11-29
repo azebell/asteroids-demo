@@ -27,6 +27,7 @@ void Spaceship::update() {
 
 
 void Spaceship::render() {
+	glColor3ub(255,255,255);
 	// draw the Spaceship
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_POLYGON);
