@@ -77,6 +77,8 @@ void Game::render() {
 
 	clearScreen();
 
+	glColor3ub(255,255,255);
+
 	// draw the clipping window
 	glBegin(GL_LINE_LOOP);
 	for(unsigned i=0; i < this->clipWindow.size(); i++) {

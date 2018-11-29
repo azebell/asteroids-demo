@@ -65,6 +65,7 @@ void Asteroid::update() {
 }
 
 void Asteroid::render() {
+	glColor3ub(255,255,255);
 	// draw the asteroid
 	glBegin(GL_LINE_LOOP);
 	for(unsigned i=0; i < this->Tverts.size(); i++) {

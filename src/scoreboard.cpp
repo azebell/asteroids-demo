@@ -12,21 +12,18 @@
 
 
 //
-void drawString(float x, float y, void *font, const char* string)
-{
+void drawString(float x, float y, void *font, const char *text) {
     //define a character to hold chars of string
     const char *c;
     //position text on screen
     glRasterPos2f(x, y);
     //loop to store current char of string in char defined earlier and add it using glutBitmapCharacter()
-    for(c=string; *c!='\0'; c++)
-    {
-	glutBitmapCharacter(font, *c);
+    for(c=text; *c!='\0'; c++) {
+		glutBitmapCharacter(font, *c);
     }
 }
 
-void processTextToScreen()
-{
+void processTextToScreen() {
     int num = 4;
    
     //define memory to hold string
@@ -40,8 +37,7 @@ void processTextToScreen()
 }
 
 //put in game render method 
-void drawScoreboard()
-{
+void drawScoreboard() {
 	//process Text to Screen for each portion of scoreboard
 	processTextToScreen();//will have a message parameter which stored what will go in sprint
 				//and will have messagge variable for each message 
