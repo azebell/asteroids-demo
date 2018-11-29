@@ -13,9 +13,9 @@ float rand_range(float range) {
 Asteroid::Asteroid(vec3 position, float radius) :
 pos(position) {
 	float PI = 3.14159265359;
-	this->vel = {rand_range(2.5),rand_range(2.5),0.0};
+	this->vel = {rand_range(1.0),rand_range(1.0),0.0};
 	this->theta = 0.0;
-	this->alpha = rand_range(0.1);
+	this->alpha = rand_range(0.05);
 
 	float iwx = 1 - rand_range(0.5), wx = iwx;
 	float iwy = 1 - rand_range(0.5), wy = iwy;
@@ -37,9 +37,9 @@ pos(position) {
 // creating Asteroid with predefined geometry
 Asteroid::Asteroid(vec3 position, std::vector<vec3> vertices) :
 pos(position), verts(vertices) {
-	this->vel = {rand_range(2.5),rand_range(2.5),0.0};
+	this->vel = {rand_range(1.0),rand_range(1.0),0.0};
 	this->theta = 0.0;
-	this->alpha = rand_range(0.1);
+	this->alpha = rand_range(0.05);
 
 	this->Tverts = verts;
 	this->type = Asteroid::POLYROID;

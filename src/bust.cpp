@@ -75,6 +75,7 @@ std::vector<Asteroid> bustBarycentric(Asteroid A) {
 	verts.push_back( -centroid );
 	result.emplace_back(A.pos+centroid, verts);
 	result[0].type = Asteroid::BARYROID;
+	result[0].vel = vec3Mag(result[0].vel) * vec3Unit(centroid);
 	verts.clear();
 
 	centroid = {
@@ -86,6 +87,7 @@ std::vector<Asteroid> bustBarycentric(Asteroid A) {
 	verts.push_back( -centroid );
 	result.emplace_back(A.pos+centroid, verts);
 	result[1].type = Asteroid::BARYROID;
+	result[1].vel = vec3Mag(result[1].vel) * vec3Unit(centroid);
 	verts.clear();
 
 	centroid = {
@@ -97,6 +99,7 @@ std::vector<Asteroid> bustBarycentric(Asteroid A) {
 	verts.push_back( centroid );
 	result.emplace_back(A.pos+centroid, verts);
 	result[2].type = Asteroid::BARYROID;
+	result[2].vel = vec3Mag(result[2].vel) * vec3Unit(centroid);
 
 	return result;
 }
