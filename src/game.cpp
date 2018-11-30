@@ -8,7 +8,7 @@
 #include "glFuncs.h" // for rendering clipWindow
 #include <vector>
 #include <cmath>
-
+#include <iostream>
 
 Game::Game() {
 
@@ -25,10 +25,20 @@ void Game::init(int window_width, int window_height, float octRadius) {
         float rando = ((rand()%(int)octRadius)*2) - octRadius; // x position rng
         float rando2 = ((rand()%(int)octRadius)*2) - octRadius; // y position rng
         float arearando = ((rand()%5)) + 5;             // asteroid area rng
-    
+
         // place dem asteroids randomly son
         Asteroid a( (vec3) {this->origin.x + rando, this->origin.y + rando2} , arearando );
         this->asteroids.push_back(a); // throw em in that vector
+
+
+        for(int j = 0; j < i; j++){
+            // check basteroids for intersections
+            // kill em if they do 
+            if(poly_intersect(asteroids[j].Tverts, asteroids[i].Tverts)) {
+                this->asteroids.erase(asteroids.begin()+i);
+                i--;
+            }
+        }
     }
 
     // create the clipping window

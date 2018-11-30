@@ -29,7 +29,7 @@ pos(position) {
 		wx = 1 - rand_range(0.5);
 		wy = 1 - rand_range(0.5);
 	}
-	this->Tverts = verts;
+	this->transformVerts();
 	this->type = Asteroid::POLYROID;
 	this->drawstyle = OUTLINE;
 }
@@ -41,7 +41,7 @@ pos(position), verts(vertices) {
 	this->theta = 0.0;
 	this->alpha = rand_range(0.05);
 
-	this->Tverts = verts;
+	this->transformVerts();
 	this->type = Asteroid::POLYROID;
 	this->drawstyle = OUTLINE;
 }
