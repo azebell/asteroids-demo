@@ -2,16 +2,7 @@
 #include <GL/glut.h>
 #include <stdio.h>
 
-//JUST AN OUTLINE
 
-//clipping window dimensions: clipWindow; bottom lines of octagon and WINDOW_MAX_Y/X
-//need NUM MISSILES FIRED; NUM ASTEROIDS ON SCREEN; NUM ASTEROIDS HIT #RATIO OF MIS FIRED TO AST DESTROYED
-	//where to get that info from:
-		//game.cpp update all these nnumber from there: missiles.size; asteroids.size; resolveCollisions-->points_in_poly
-
-
-
-//
 void drawString(float x, float y, void *font, const char *text) {
     //define a character to hold chars of string
     const char *c;
@@ -23,22 +14,45 @@ void drawString(float x, float y, void *font, const char *text) {
     }
 }
 
-void processTextToScreen() {
-    int num = 4;
+void processTextToScreen(float x, float y, float number, const char *textFormat) {
    
     //define memory to hold string
-    char charString[10];
+    char charString[20];
     //put data in string
-    sprintf(charString, "Test %d", num);
+    sprintf(charString, textFormat, number);
     glColor3ub(0, 255, 128);
     ////drawString()...
     drawString(150.0, 75.0, GLUT_BITMAP_HELVETICA_12, charString);
     ////clear up string 
 }
 
-//put in game render method 
-void drawScoreboard() {
-	//process Text to Screen for each portion of scoreboard
-	processTextToScreen();//will have a message parameter which stored what will go in sprint
-				//and will have messagge variable for each message 
+//TODO
+//need to format decimal
+//calculate destroyRatio in render method
+
+void drawScoreboard(float number) {
+    
+    float posFactorX = (WINDOW_MAX_X/6); //change to WINDOW_MAX_X and WINDOW_MAX_Y
+    float posFactorY = WINDOW_MAX_Y/10;
+    float secondLineFacX = posFactorX+10;
+    float thirdLineFacX = posFactorX+20;
+    float secondLineFacY = posFactorY-20;
+    float thirdLineFacY = posFactorY-40;
+
+    processTextToScreen(posFactorX, posFactorY, 0, "Missiles");
+    processTextToScreen(secondLineFacX, secondLineFacY, 0, "Fired");
+    processTextToScreen(thirdLineFacX, thirdLineFacY, number, "%d");
+
+    processTextToScreen(posFactor*2, posFactorY, 0, "Asteroids");
+    processTextToScreen(secondLineFacX*2, secondLineFacY, 0, "Visible");
+    processTextToScreen(thirdLineFacX*2, thirdLineFacY, number, "%d");
+
+    processTextToScreen(posFactorX*4, posFactorY, 0, "Asteroids");
+    processTextToScreen(secondLineFacX*4, secondLineFacY, 0, "Struck");
+    processTextToScreen(thirdLineFacX*4, thirdLineFacY, number, "%d");
+
+    processTextToScreen(posFactorX*5, posFactorY, 0, "Destroy");
+    processTextToScreen(secondLineFacX*5, secondLineFacY, 0, "Ratio");
+    processTextToScreen(thirdLineFacX*5, thirdLineFacY, number, "%d %");
+
 }
