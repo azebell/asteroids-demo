@@ -32,8 +32,8 @@ void processTextToScreen(float x, float y, float number, const char *textFormat)
 
 void drawScoreboard(float number) {
     
-    float posFactorX = (WINDOW_MAX_X/6); //change to WINDOW_MAX_X and WINDOW_MAX_Y
-    float posFactorY = WINDOW_MAX_Y/10;
+    float posFactorX = (1000/6); //change to WINDOW_MAX_X and WINDOW_MAX_Y
+    float posFactorY = 1000/10;
     float secondLineFacX = posFactorX+10;
     float thirdLineFacX = posFactorX+20;
     float secondLineFacY = posFactorY-20;
@@ -43,7 +43,7 @@ void drawScoreboard(float number) {
     processTextToScreen(secondLineFacX, secondLineFacY, 0, "Fired");
     processTextToScreen(thirdLineFacX, thirdLineFacY, number, "%d");
 
-    processTextToScreen(posFactor*2, posFactorY, 0, "Asteroids");
+    processTextToScreen(posFactorX*2, posFactorY, 0, "Asteroids");
     processTextToScreen(secondLineFacX*2, secondLineFacY, 0, "Visible");
     processTextToScreen(thirdLineFacX*2, thirdLineFacY, number, "%d");
 
