@@ -8,7 +8,8 @@
 #include "glFuncs.h" // for rendering clipWindow
 #include <vector>
 #include <cmath>
-#include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
 Game::Game() {
 
@@ -20,7 +21,9 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
     // generate some asteroids
     // make placement random 
-
+    
+    srand(time(NULL)); // seed the rand() function with the time
+    
     for(int i=0; i<50; i++) {
         float rando = ((rand()%(int)octRadius)*2) - octRadius; // x position rng
         float rando2 = ((rand()%(int)octRadius)*2) - octRadius; // y position rng
