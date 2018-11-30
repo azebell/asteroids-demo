@@ -2,8 +2,8 @@
 #define SCOREBOARD_H
 
 void drawString(float x, float y, void *font, const char *text);
-void processTextToScreen(float x, float y, int number, const char *textFormat);
-void drawScoreboard(int number);
+void processTextToScreen(float x, float y, float number, const char *textFormat);
+void drawScoreboard(float number);
 
 #endif // SCOREBOARD_H
 
