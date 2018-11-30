@@ -1,4 +1,3 @@
-
 #include "game.h"
 #include "asteroid.h"
 #include "spaceship.h"
@@ -72,6 +71,8 @@ void Game::update() {
 	this->resolveOverlaps();
 	// update the spaceship
     this->spaceship.update();
+    
+    //update scoreboard values here
 }
 
 void Game::render() {
@@ -101,7 +102,11 @@ void Game::render() {
     this->spaceship.render();
 	
 	//Draw Scoreboard
-	drawScoreboard();
+	//TODO
+	//make a vector size 4 to update each time with the correct numbers 
+	//and pass that instead to the function. That way you can just take the 
+	//values from that and assign them properly
+	drawScoreboard(10.0);
 
 	swapBuffers();
 }
