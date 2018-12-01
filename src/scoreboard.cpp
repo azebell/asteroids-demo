@@ -22,7 +22,7 @@ void processTextToScreen(float x, float y, float number, const char *textFormat)
     sprintf(charString, textFormat, number);
     glColor3ub(0, 255, 128);
     ////drawString()...
-    drawString(150.0, 75.0, GLUT_BITMAP_HELVETICA_12, charString);
+    drawString(x, y, GLUT_BITMAP_TIMES_ROMAN_24, charString);
     ////clear up string 
 }
 
@@ -32,12 +32,12 @@ void processTextToScreen(float x, float y, float number, const char *textFormat)
 
 void drawScoreboard(float number) {
     
-    float posFactorX = (1000/6); //change to WINDOW_MAX_X and WINDOW_MAX_Y
+    float posFactorX = 1000/6; //change to WINDOW_MAX_X and WINDOW_MAX_Y
     float posFactorY = 1000/10;
-    float secondLineFacX = posFactorX+10;
-    float thirdLineFacX = posFactorX+20;
-    float secondLineFacY = posFactorY-20;
-    float thirdLineFacY = posFactorY-40;
+    float secondLineFacX = posFactorX+20;
+    float thirdLineFacX = posFactorX+40;
+    float secondLineFacY = posFactorY-40;
+    float thirdLineFacY = posFactorY-60;
 
     processTextToScreen(posFactorX, posFactorY, 0, "Missiles");
     processTextToScreen(secondLineFacX, secondLineFacY, 0, "Fired");
