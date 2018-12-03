@@ -7,7 +7,7 @@ void drawMessage(float x, float y, void *font, const char* string)
 {
     	const char *character;
 	glRasterPos2f(x, y);
-  	for(character = string; *character != '/0'; character++)
+  	for(character = string; *character != '\0'; character++)
 	{
 		glutBitmapCharacter(font, *character);
 	}
