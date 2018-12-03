@@ -7,16 +7,17 @@
 #include <signal.h> 
 #include <iostream>
 //extern istream cin; 
-static bool paused = false;
+static bool paused = true;
 
 void Game::keyDown(unsigned char key, int x, int y) {
 	switch(key) {
 		case 's':
 		case 'S':
+			paused = !paused;
 			break;
 		case 'p':
-		case 'P':
-			getchar();
+		case 'P':		
+			paused = !paused;
 			break;
 
 		case 't':

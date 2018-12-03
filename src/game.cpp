@@ -5,6 +5,7 @@
 #include "missile.h"
 #include "bust.h"
 #include "zgeom.h"
+#include "gamekeyboard.h"
 #include "glFuncs.h" // for rendering clipWindow
 #include <vector>
 #include <cmath>
@@ -44,7 +45,8 @@ void Game::init(int window_width, int window_height, float octRadius) {
 }
 
 void Game::update() {
-	// update each missile
+	
+	if(getPaused() == false) {
 	for(unsigned i=0; i<this->missiles.size(); i++) {
 		this->missiles[i].update();
 		if( checkClipping(this->missiles[i].Tverts) ) {
@@ -68,6 +70,7 @@ void Game::update() {
 
 	// update the spaceship
     this->spaceship.update();
+	}
 }
 
 void Game::render() {

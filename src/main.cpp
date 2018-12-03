@@ -65,8 +65,6 @@ int main(int argc, char** argv) {
 	g.init(WINDOW_MAX_X, WINDOW_MAX_Y, radius);
 	currTime = 0;
 	accumulator = 0;
-	glutDisplayFunc(display);
-       	glutIdleFunc(update);
         
 	glutKeyboardFunc(keyDown);
 	glutSpecialFunc(specialKeyDown);
@@ -75,8 +73,7 @@ int main(int argc, char** argv) {
 	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 	
 	glutDisplayFunc(display);
-        glutIdleFunc(update);
-
+       	glutIdleFunc(update);
 	//glutDisplayFunc(display);
 	glutMainLoop();
 }
