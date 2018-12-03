@@ -1,4 +1,3 @@
-
 #ifndef GAME_H
 #define GAME_H
 
@@ -17,6 +16,9 @@ public:
 	std::vector<Asteroid> asteroids;
     Spaceship spaceship;
 	std::vector<Missile> missiles;
+	std::vector<int> scoreboardVals;
+    int missileCount;
+
 
 	// TODO 
 	// add Scoreboard object to game
