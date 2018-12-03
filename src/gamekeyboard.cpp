@@ -1,6 +1,11 @@
+#define _POSIX_SOURCE
 #include "gameState.h"
 #include "game.h"
 #include <GL/glut.h>
+#include "unistd.h"
+#include <sys/types.h> 
+#include <signal.h> 
+static bool paused = false;
 
 void Game::keyDown(unsigned char key, int x, int y) {
 	switch(key) {
@@ -9,7 +14,8 @@ void Game::keyDown(unsigned char key, int x, int y) {
 			break;
 		case 'p':
 		case 'P':
-			displayText("Paused");
+			
+			pause();
 			break;
 
 		case 't':
@@ -66,3 +72,6 @@ void Game::specialKeyUp(int key, int x, int y) {
 	}
 }
 
+bool getPaused() {
+	return paused;
+}

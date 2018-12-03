@@ -10,7 +10,7 @@
 #include <GL/glut.h>
 #include "glFuncs.h"
 #include "game.h"
-
+#include "gamekeyboard.h"
 
 // Specify the values to place and size the window on the screen
 const int WINDOW_POSITION_X = 500;
@@ -41,7 +41,6 @@ void update( void ) {
 	display();
 }
 
-
 // relay functions for key handling
 void keyDown(unsigned char key, int x, int y) { g.keyDown(key, x, y); }
 void specialKeyDown(int key, int x, int y) { g.specialKeyDown(key, x, y); }
@@ -65,15 +64,22 @@ int main(int argc, char** argv) {
 	g.init(WINDOW_MAX_X, WINDOW_MAX_Y, radius);
 	currTime = 0;
 	accumulator = 0;
-
+	//glutDisplayFunc(display);
+	//if(getPaused() == false) {
+		
+        //	glutIdleFunc(update);
+	//}
+        
 	glutKeyboardFunc(keyDown);
 	glutSpecialFunc(specialKeyDown);
 	glutKeyboardUpFunc(keyUp);
 	glutSpecialUpFunc(specialKeyUp);
 	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
-
+	
 	glutDisplayFunc(display);
-	glutIdleFunc(update);
+        glutIdleFunc(update);
+
+	//glutDisplayFunc(display);
 	glutMainLoop();
 }
 
