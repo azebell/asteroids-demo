@@ -5,6 +5,8 @@
 #include "unistd.h"
 #include <sys/types.h> 
 #include <signal.h> 
+#include <iostream>
+//extern istream cin; 
 static bool paused = false;
 
 void Game::keyDown(unsigned char key, int x, int y) {
@@ -14,8 +16,7 @@ void Game::keyDown(unsigned char key, int x, int y) {
 			break;
 		case 'p':
 		case 'P':
-			
-			pause();
+			getchar();
 			break;
 
 		case 't':

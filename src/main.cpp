@@ -20,6 +20,7 @@ const int WINDOW_MAX_Y = 1000;
 
 const int FRAMERATE = 1000.0/60.0;
 
+
 Game g;
 int currTime;
 int accumulator; // holds consumable simulation time (ms)
@@ -64,11 +65,8 @@ int main(int argc, char** argv) {
 	g.init(WINDOW_MAX_X, WINDOW_MAX_Y, radius);
 	currTime = 0;
 	accumulator = 0;
-	//glutDisplayFunc(display);
-	//if(getPaused() == false) {
-		
-        //	glutIdleFunc(update);
-	//}
+	glutDisplayFunc(display);
+       	glutIdleFunc(update);
         
 	glutKeyboardFunc(keyDown);
 	glutSpecialFunc(specialKeyDown);
