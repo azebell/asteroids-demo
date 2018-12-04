@@ -27,19 +27,18 @@ void Game::init(int window_width, int window_height, float octRadius) {
     srand(time(NULL)); // seed the rand() function with the time
 
     for(int i=0; i<50; i++) {
-        float rando = ((rand()%(int)octRadius)*2) - octRadius; // x position rng
-        float rando2 = ((rand()%(int)octRadius)*2) - octRadius; // y position rng
+        float rando = ((rand()%(int)octRadius)*1.5) - octRadius/1.3; // x position rng
+        float rando2 = ((rand()%(int)octRadius)*1.5) - octRadius/1.3; // y position rng
         float arearando = ((rand()%5)) + 5;             // asteroid area rng
 
         // place dem asteroids randomly son
         Asteroid a( (vec3) {this->origin.x + rando, this->origin.y + rando2} , arearando );
         this->asteroids.push_back(a); // throw em in that vector
-
-
+ 
         for(int j = 0; j < i; j++){
             // check basteroids for intersections
             // kill em if they do 
-            if(poly_intersect(asteroids[j].Tverts, asteroids[i].Tverts)) {
+            if(poly_intersect(asteroids[j].Tverts, asteroids[i].Tverts) ) {
                 this->asteroids.erase(asteroids.begin()+i);
                 i--;
             }
@@ -109,10 +108,7 @@ void Game::render() {
     for(unsigned i=0; i < this->missiles.size(); i++) {
         this->missiles[i].render();
     }
-    // Draw the missiles
-    for(unsigned i=0; i < this->missiles.size(); i++) {
-        this->missiles[i].render();
-    }
+
 
     if(getPaused() == true && getStart() == true) {
         displayText("Press s to start the game"); // starting condition message 
