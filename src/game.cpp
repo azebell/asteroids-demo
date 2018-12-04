@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#include "gameState.h"
+>>>>>>> origin/th
 #include "game.h"
 #include "asteroid.h"
 #include "spaceship.h"
@@ -5,6 +9,7 @@
 #include "bust.h"
 #include "scoreboard.h"
 #include "zgeom.h"
+#include "gamekeyboard.h"
 #include "glFuncs.h" // for rendering clipWindow
 #include <vector>
 #include <cmath>
@@ -60,6 +65,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 }
 
 void Game::update() {
+<<<<<<< HEAD
     // update each missile
     for(unsigned i=0; i<this->missiles.size(); i++) {
         this->missiles[i].update();
@@ -94,6 +100,38 @@ void Game::render() {
     clearScreen();
 
     glColor3ub(255,255,255);
+=======
+	
+	if(getPaused() == false) { //stops updating if user pauses
+		for(unsigned i=0; i<this->missiles.size(); i++) {
+			this->missiles[i].update();
+			if( checkClipping(this->missiles[i].Tverts) ) {
+				this->missiles.erase(missiles.begin()+i);
+				i--;
+			}
+		}
+
+		this->resolveCollisions();
+
+		// update each asteroid
+		for(unsigned i=0; i<this->asteroids.size(); i++) {
+			this->asteroids[i].update();
+			int clip = this->checkClipping( this->asteroids[i].Tverts );
+			if(clip == -1) {
+				asteroids[i].pos = 2*origin - asteroids[i].pos;
+				asteroids[i].update();
+			}
+			asteroids[i].clip(this->clipWindow);
+		}
+
+		// update the spaceship
+    		this->spaceship.update();
+	} 
+}
+
+void Game::render() {
+	clearScreen();
+>>>>>>> origin/th
 
     // draw the clipping window
     glBegin(GL_LINE_LOOP);
@@ -107,13 +145,28 @@ void Game::render() {
         this->asteroids[i].render();
     }
 
+<<<<<<< HEAD
     // Draw the missiles
     for(unsigned i=0; i < this->missiles.size(); i++) {
         this->missiles[i].render();
     }
+=======
+	// Draw the missiles
+	for(unsigned i=0; i < this->missiles.size(); i++) {
+		this->missiles[i].render();
+	}
+	
+	if(getPaused() == true && getStart() == true) {
+                displayText("Press s to start the game"); // starting condition message 
+        } else if(getPaused() == true && getStart() == false) {
+                displayText("Paused: Press p to continue"); // pause message
+        }
+
+>>>>>>> origin/th
 
     // Draw the Spaceship
     this->spaceship.render();
+<<<<<<< HEAD
 
     //Draw Scoreboard
     //TODO
@@ -123,6 +176,9 @@ void Game::render() {
     drawScoreboard(10.0);
 
     swapBuffers();
+=======
+	swapBuffers();
+>>>>>>> origin/th
 }
 
 //int Game::checkClipping(Asteroid A) {

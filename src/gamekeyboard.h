@@ -1,0 +1,2 @@
+bool getPaused();
+bool getStart();
