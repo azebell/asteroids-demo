@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 
+//Code for drawing a string of characters
 void drawMessage(float x, float y, void *font, const char* string)
 {
     	const char *character;
@@ -13,12 +14,11 @@ void drawMessage(float x, float y, void *font, const char* string)
 	}
 }
 
+//Displays characters on the screen
 void displayText(std::string textToDisplay)
 {
-    int num = 4;
-    char charString[50];
-
-    sprintf(charString, textToDisplay.c_str(), num);
-    glColor3ub(0, 0, 255);
-    drawMessage(500.0, 500.0, GLUT_BITMAP_HELVETICA_12, charString); 
+    	char charString[50];
+	sprintf(charString, textToDisplay, 4);
+    	glColor3ub(255, 255, 255);
+    	drawMessage(400.0, 500.0, GLUT_BITMAP_HELVETICA_18, charString); 
 }

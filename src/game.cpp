@@ -1,4 +1,4 @@
-
+#include "gameState.h"
 #include "game.h"
 #include "asteroid.h"
 #include "spaceship.h"
@@ -47,34 +47,33 @@ void Game::init(int window_width, int window_height, float octRadius) {
 void Game::update() {
 	
 	if(getPaused() == false) {
-	for(unsigned i=0; i<this->missiles.size(); i++) {
-		this->missiles[i].update();
-		if( checkClipping(this->missiles[i].Tverts) ) {
-			this->missiles.erase(missiles.begin()+i);
-			i--;
+		for(unsigned i=0; i<this->missiles.size(); i++) {
+			this->missiles[i].update();
+			if( checkClipping(this->missiles[i].Tverts) ) {
+				this->missiles.erase(missiles.begin()+i);
+				i--;
+			}
 		}
-	}
 
-	this->resolveCollisions();
+		this->resolveCollisions();
 
-	// update each asteroid
-	for(unsigned i=0; i<this->asteroids.size(); i++) {
-		this->asteroids[i].update();
-		int clip = this->checkClipping( this->asteroids[i].Tverts );
-		if(clip == -1) {
-			asteroids[i].pos = 2*origin - asteroids[i].pos;
-			asteroids[i].update();
+		// update each asteroid
+		for(unsigned i=0; i<this->asteroids.size(); i++) {
+			this->asteroids[i].update();
+			int clip = this->checkClipping( this->asteroids[i].Tverts );
+			if(clip == -1) {
+				asteroids[i].pos = 2*origin - asteroids[i].pos;
+				asteroids[i].update();
+			}
+			asteroids[i].clip(this->clipWindow);
 		}
-		asteroids[i].clip(this->clipWindow);
-	}
 
-	// update the spaceship
-    this->spaceship.update();
-	}
+		// update the spaceship
+    		this->spaceship.update();
+	} 
 }
 
 void Game::render() {
-
 	clearScreen();
 
 	// draw the clipping window
@@ -93,10 +92,16 @@ void Game::render() {
 	for(unsigned i=0; i < this->missiles.size(); i++) {
 		this->missiles[i].render();
 	}
+	
+	if(getPaused() == true && getStart() == true) {
+                displayText("Press s to start the game"); // starting condition message 
+        } else if(getPaused() == true && getStart() == false) {
+                displayText("Paused: Press p to continue"); // pause message
+        }
+
 
 	// Draw the Spaceship
     this->spaceship.render();
-	
 	swapBuffers();
 }
 
