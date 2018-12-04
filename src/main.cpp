@@ -74,7 +74,6 @@ int main(int argc, char** argv) {
 	
 	glutDisplayFunc(display);
        	glutIdleFunc(update);
-	//glutDisplayFunc(display);
 	glutMainLoop();
 }
 

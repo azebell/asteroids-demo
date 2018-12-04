@@ -17,8 +17,7 @@ void drawMessage(float x, float y, void *font, const char* string)
 //Displays characters on the screen
 void displayText(std::string textToDisplay)
 {
-    	char charString[50];
-	sprintf(charString, textToDisplay, 4);
+	
     	glColor3ub(255, 255, 255);
-    	drawMessage(400.0, 500.0, GLUT_BITMAP_HELVETICA_18, charString); 
+    	drawMessage(400.0, 500.0, GLUT_BITMAP_HELVETICA_18, textToDisplay.c_str()); 
 }

@@ -46,7 +46,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
 void Game::update() {
 	
-	if(getPaused() == false) {
+	if(getPaused() == false) { //stops updating if user pauses
 		for(unsigned i=0; i<this->missiles.size(); i++) {
 			this->missiles[i].update();
 			if( checkClipping(this->missiles[i].Tverts) ) {
