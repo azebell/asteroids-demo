@@ -6,7 +6,7 @@
 #include <signal.h> 
 #include <iostream>
 
-static bool paused = true;
+static bool paused = false;
 static bool start = true;
 
 void Game::keyDown(unsigned char key, int x, int y) {
@@ -87,4 +87,12 @@ bool getPaused() {
 // Returns if the game is in the starting state
 bool getStart() {
 	return start;
+}
+
+void setPaused(int value){
+    paused = value;
+}
+
+void setStart(int value){
+    start = value;
 }

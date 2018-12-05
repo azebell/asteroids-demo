@@ -59,7 +59,12 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
 	this->spaceship.pos = origin;
 	this->missileCount = 0;
+
 	this->asDestroy = 0;
+
+    this->update();
+    setPaused(true);
+
 }
 
 void Game::update() {
@@ -175,9 +180,7 @@ void Game::resolveOverlaps() {
 			if(i==j)
 				continue;
 			if(poly_intersect(asteroids[i].Tverts, asteroids[j].Tverts)) {
-				float A1 = area_of_tris(asteroids[i].verts);
-				float A2 = area_of_tris(asteroids[j].verts);
-				if(A1 < A2)
+				if(asteroids[i].area < asteroids[j].area)
 					asteroids[i].setDrawStyle(Asteroid::FILLED);
 				else
 					asteroids[j].setDrawStyle(Asteroid::FILLED);
@@ -185,4 +188,5 @@ void Game::resolveOverlaps() {
 		}
 	}
 }
+
 

@@ -32,6 +32,9 @@ pos(position) {
 	this->transformVerts();
 	this->type = Asteroid::POLYROID;
 	this->drawstyle = OUTLINE;
+    std::vector<vec3> tris = triangulate(verts, CCW_WINDING);
+    this->area = area_of_tris(tris);
+
 }
 
 // creating Asteroid with predefined geometry
@@ -44,6 +47,8 @@ pos(position), verts(vertices) {
 	this->transformVerts();
 	this->type = Asteroid::POLYROID;
 	this->drawstyle = OUTLINE;
+    std::vector<vec3> tris = triangulate(verts, CCW_WINDING);
+    this->area = area_of_tris(tris);
 }
 
 void Asteroid::transformVerts() {
