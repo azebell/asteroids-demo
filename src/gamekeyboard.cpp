@@ -1,9 +1,35 @@
 
+#include "gameState.h"
 #include "game.h"
 #include <GL/glut.h>
+#include <sys/types.h> 
+#include <signal.h> 
+#include <iostream>
+
+static bool paused = true;
+static bool start = true;
 
 void Game::keyDown(unsigned char key, int x, int y) {
 	switch(key) {
+		case 's':
+		case 'S':
+			if(start == true) {
+				paused = !paused;
+				start = !start;
+			}
+			break;
+		case 'p':
+		case 'P':		
+			paused = !paused;
+			if(paused) {
+				displayText("Paused, Press P to continue playing");	
+			}
+			break;
+
+		case 't':
+		case 'T':
+			break;
+		
 		case 'q':
 		case 'Q':
 			exit(0);
@@ -53,4 +79,11 @@ void Game::specialKeyUp(int key, int x, int y) {
 			break;
 	}
 }
-
+// Returns if the game is paused
+bool getPaused() {
+	return paused;
+}
+// Returns if the game is in the starting state
+bool getStart() {
+	return start;
+}
