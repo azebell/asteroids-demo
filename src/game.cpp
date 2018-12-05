@@ -59,6 +59,8 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
 	this->spaceship.pos = origin;
 	this->missileCount = 0;
+    this->update();
+    setPaused(true);
 }
 
 void Game::update() {
@@ -180,4 +182,5 @@ void Game::resolveOverlaps() {
 		}
 	}
 }
+
 
