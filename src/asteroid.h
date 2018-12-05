@@ -12,7 +12,8 @@ public:
 	vec3 vel; // velocity
 	float theta; // rotation
 	float alpha; // rotational velocity
-	mat4 transform;
+	float area; // asteroid area
+    mat4 transform;
 	std::vector<vec3> verts; // polygon vertices
 	std::vector<vec3> Tverts; // transformed vertices
 
