@@ -12,7 +12,6 @@
 #include <cmath>
 #include <stdlib.h>
 #include <time.h>
-
 Game::Game() {
 
 }
@@ -59,7 +58,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
 	this->spaceship.pos = origin;
 	this->missileCount = 0;
-
+	this->destroyRatio = 0.0;
 	this->asDestroy = 0;
 
     this->update();
@@ -127,19 +126,14 @@ void Game::render() {
 	// Draw the Spaceship
 	this->spaceship.render();
 
-	//Draw Scoreboard
-	//TODO
-	//make a vector size 4 to update each time with the correct numbers 
-	//and pass that instead to the function. That way you can just take the 
-	//values from that and assign them properly
+	//Draw the Scoreboard
 
-	 //needs to be moved to when spacebar is pressed 
+	destroyRatio = ((float)missileCount/(float)asDestroy) * 100;
 	this->scoreboardVals.push_back(missileCount);
 	this->scoreboardVals.push_back(this->asteroids.size());
 	this->scoreboardVals.push_back(asDestroy);
-	//std::cout << "Draw Scoreboard Entering" << std::endl;
-	drawScoreboard(this->scoreboardVals, 1000, 1000);
-	//std::cout<<"Clear Scoreboard" << std::endl;
+	
+	drawScoreboard(this->scoreboardVals, 1000, 1000, destroyRatio);
 	this->scoreboardVals.clear();
 
 	swapBuffers();

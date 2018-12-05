@@ -28,18 +28,18 @@ void processTextToScreen(float x, float y, float number, const char *textFormat)
 }                                                                                  //TODO
 
 
-void drawScoreboard(std::vector<int> values, int height, int width) {
+void drawScoreboard(std::vector<int> values, int height, int width, float ratio) {
 
 float numMis = (float) values[0];
 float numAs = (float) values[1];
 float numDestroy = (float) values[2];
 float posFactorX = ((float)width/8);
 float posFactorY =(float) (height/8)*0.75;
-float ratio =  numMis/numDestroy * 100;
+
 processTextToScreen(posFactorX, posFactorY, numMis, "Missiles Fired %.0f");                               
 processTextToScreen(posFactorX, posFactorY-40, numAs, "Asteroids Visible %.0f");
 
-processTextToScreen(posFactorX*5.50, posFactorY, ratio, "Destroy Ratio %.3f %");
+processTextToScreen(posFactorX*5.50, posFaactorY, ratio, "Destroy Ratio %.3f %");
 
 processTextToScreen(posFactorX*5.50, posFactorY-40, numDestroy, "Asteroids Struck %.0f");
 

@@ -19,7 +19,7 @@ public:
 	std::vector<int> scoreboardVals;
         int missileCount;
 	int asDestroy;
-
+	float destroyRatio;
 	// TODO 
 	// add Scoreboard object to game
 
