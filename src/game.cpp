@@ -59,6 +59,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
 	this->spaceship.pos = origin;
 	this->missileCount = 0;
+	this->asDestroy = 0;
 }
 
 void Game::update() {
@@ -127,9 +128,10 @@ void Game::render() {
 	//and pass that instead to the function. That way you can just take the 
 	//values from that and assign them properly
 
-	this->missileCount = missiles.size(); //needs to be moved to when spacebar is pressed 
-	this->scoreboardVals.push_back(this->missileCount);
+	 //needs to be moved to when spacebar is pressed 
+	this->scoreboardVals.push_back(missileCount);
 	this->scoreboardVals.push_back(this->asteroids.size());
+	this->scoreboardVals.push_back(asDestroy);
 	//std::cout << "Draw Scoreboard Entering" << std::endl;
 	drawScoreboard(this->scoreboardVals, 1000, 1000);
 	//std::cout<<"Clear Scoreboard" << std::endl;
@@ -157,7 +159,8 @@ void Game::resolveCollisions() {
 			if(point_in_poly(missiles[k].Tverts[1], this->asteroids[i].Tverts)) {
 				std::vector<Asteroid> bustRoids = bust(asteroids[i]);
 				this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
-				this->asteroids.erase(this->asteroids.begin()+i);
+				this->asteroids.erase(this->asteroids.begin()+i); 
+				asDestroy++;
 				this->missiles.erase(missiles.begin()+k);
 				k--;
 				break;

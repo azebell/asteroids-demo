@@ -24,7 +24,7 @@ void processTextToScreen(float x, float y, float number, const char *textFormat)
     glColor3ub(0, 255, 128);
 //drawString()...
     drawString(x, y, GLUT_BITMAP_TIMES_ROMAN_24, charString);
-//clear up string           std::cout << "Finish process draw" << std::endl;
+
 }                                                                                  //TODO
 
 
@@ -32,14 +32,15 @@ void drawScoreboard(std::vector<int> values, int height, int width) {
 
 float numMis = (float) values[0];
 float numAs = (float) values[1];
+float numDestroy = (float) values[2];
 float posFactorX = ((float)width/8);
 float posFactorY =(float) (height/8)*0.75;
-float ratio =  numAs/ 5.0 * 100;
+float ratio =  numMis/numDestroy * 100;
 processTextToScreen(posFactorX, posFactorY, numMis, "Missiles Fired %.0f");                               
 processTextToScreen(posFactorX, posFactorY-40, numAs, "Asteroids Visible %.0f");
 
-processTextToScreen(posFactorX*5.50, posFactorY, ratio, "Destroy Ratio %.2f");
+processTextToScreen(posFactorX*5.50, posFactorY, ratio, "Destroy Ratio %.3f %");
 
-processTextToScreen(posFactorX*5.50, posFactorY-40, 10.0, "Asteroids Struck %.0f");
- //std::cout<< "P4 Done" << std::endl;
+processTextToScreen(posFactorX*5.50, posFactorY-40, numDestroy, "Asteroids Struck %.0f");
+
 }

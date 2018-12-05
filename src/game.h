@@ -17,8 +17,8 @@ public:
     Spaceship spaceship;
 	std::vector<Missile> missiles;
 	std::vector<int> scoreboardVals;
-    int missileCount;
-
+        int missileCount;
+	int asDestroy;
 
 	// TODO 
 	// add Scoreboard object to game
