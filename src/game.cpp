@@ -156,7 +156,7 @@ int Game::checkClipping(std::vector<vec3> vertices) {
 void Game::resolveCollisions() {
 	for(unsigned k=0; k<this->missiles.size(); k++) {
 		for(unsigned i=0; i<this->asteroids.size(); i++) {
-			if(point_in_poly(missiles[k].Tverts[1], this->asteroids[i].Tverts)) {
+			if(poly_intersect(missiles[k].Tverts, this->asteroids[i].Tverts)) {
 				std::vector<Asteroid> bustRoids = bust(asteroids[i]);
 				this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
 				this->asteroids.erase(this->asteroids.begin()+i); 
