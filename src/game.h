@@ -14,6 +14,7 @@ public:
 	std::vector<vec3> clipWindow; // clipping window
 
 	std::vector<Asteroid> asteroids;
+	int tessControl;
     Spaceship spaceship;
 	std::vector<Missile> missiles;
 	std::vector<int> scoreboardVals;

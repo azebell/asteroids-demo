@@ -37,7 +37,7 @@ public:
 	void clip(std::vector<vec3> clipper);
 	void setDrawStyle(DrawStyle ds);
 	void update();
-	void render();
+	void render(int);
 };
 
 #endif // ASTEROID_H
