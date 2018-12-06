@@ -76,7 +76,7 @@ void Asteroid::update() {
 	this->drawstyle = OUTLINE;
 }
 
-void Asteroid::render() {
+void Asteroid::render(int tessControl) {
 	glColor3ub(255,255,255);
 	
 	std::vector<vec3> tris;
@@ -87,8 +87,16 @@ void Asteroid::render() {
 			// draw the asteroid
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			glBegin(GL_LINE_LOOP);
-			for(unsigned i=0; i < this->Tverts.size(); i++) {
-				glVertex3f(this->Tverts[i].x, this->Tverts[i].y, 0.0);
+			if(tessControl == 0){
+				for(unsigned i=0; i < this->Tverts.size(); i++) {
+					glVertex3f(this->Tverts[i].x, this->Tverts[i].y, 0.0);
+				}				
+			}
+			else {
+				std::vector<vec3> tmp = triangulate(this->Tverts, 1);
+				for(unsigned i=0; i < tmp.size(); i++) {
+					glVertex3f(tmp[i].x, tmp[i].y, 0.0);
+				}
 			}
 			glEnd();
 			break;

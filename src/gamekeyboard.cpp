@@ -28,6 +28,12 @@ void Game::keyDown(unsigned char key, int x, int y) {
 
 		case 't':
 		case 'T':
+			if(this->tessControl == 0){
+				this->tessControl = 1;				
+			}
+			else{
+				this->tessControl = 0;
+			}
 			break;
 		
 		case 'q':

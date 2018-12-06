@@ -22,6 +22,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
 	// generate some asteroids
 	// make placement random
+	this->tessControl = 0;
 
 	srand(time(NULL)); // seed the rand() function with the time
 
@@ -107,7 +108,7 @@ void Game::render() {
 
 	// draw the asteroids
 	for(unsigned i=0; i < this->asteroids.size(); i++) {
-		this->asteroids[i].render();
+		this->asteroids[i].render(this->tessControl);
 	}
 
 	// Draw the missiles
