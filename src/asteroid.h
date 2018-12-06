@@ -13,6 +13,7 @@ public:
 	float theta; // rotation
 	float alpha; // rotational velocity
 	float area; // asteroid area
+	int clipped;
     mat4 transform;
 	std::vector<vec3> verts; // polygon vertices
 	std::vector<vec3> Tverts; // transformed vertices

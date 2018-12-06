@@ -34,7 +34,7 @@ pos(position) {
 	this->drawstyle = OUTLINE;
     std::vector<vec3> tris = triangulate(verts, CCW_WINDING);
     this->area = area_of_tris(tris);
-
+	this->clipped = 0;
 }
 
 // creating Asteroid with predefined geometry
@@ -49,6 +49,7 @@ pos(position), verts(vertices) {
 	this->drawstyle = OUTLINE;
     std::vector<vec3> tris = triangulate(verts, CCW_WINDING);
     this->area = area_of_tris(tris);
+	this->clipped = 0;
 }
 
 void Asteroid::transformVerts() {
@@ -60,6 +61,7 @@ void Asteroid::transformVerts() {
 
 void Asteroid::clip(std::vector<vec3> clipper) {
 	this->Tverts = clip_sh(this->Tverts, clipper);
+	this->clipped = 1;
 }
 
 void Asteroid::setDrawStyle(DrawStyle ds) {
@@ -74,6 +76,8 @@ void Asteroid::update() {
 
 	this->transformVerts();
 	this->drawstyle = OUTLINE;
+
+	this->clipped = 0;
 }
 
 void Asteroid::render(int tessControl) {
@@ -90,29 +94,26 @@ void Asteroid::render(int tessControl) {
 				glBegin(GL_LINE_LOOP);
 				for(unsigned i=0; i < this->Tverts.size(); i++) {
 					glVertex3f(this->Tverts[i].x, this->Tverts[i].y, 0.0);
-				}				
+				}
+				glEnd();
 			}
 			else {
-				if(this->type == POLYROID) {
-					glBegin(GL_TRIANGLES);
-					for(unsigned i=0; i < tris.size(); i++) {
-						glVertex3f(tris[i].x, tris[i].y, 0.0);
-					}
+				glBegin(GL_TRIANGLES);
+				for(unsigned i=0; i < tris.size(); i++) {
+					glVertex3f(tris[i].x, tris[i].y, 0.0);
 				}
-				else if(this->type == TRIROID) {
-					glBegin(GL_TRIANGLES);
+				glEnd();
+				if(this->type == TRIROID && this->clipped == 0) {
+					glBegin(GL_LINES);
 						glVertex3f(this->Tverts[0].x, this->Tverts[0].y, 0.0);
-						glVertex3f(this->Tverts[1].x,this->Tverts[1].y,0.0);
 						glVertex3f(this->pos.x, this->pos.y, 0.0);
 						glVertex3f(this->Tverts[1].x, this->Tverts[1].y, 0.0);
-						glVertex3f(this->Tverts[2].x,this->Tverts[2].y,0.0);
 						glVertex3f(this->pos.x, this->pos.y, 0.0);
 						glVertex3f(this->Tverts[2].x, this->Tverts[2].y, 0.0);
-						glVertex3f(this->Tverts[0].x,this->Tverts[0].y,0.0);
 						glVertex3f(this->pos.x, this->pos.y, 0.0);
+					glEnd();
 				}
 			}
-			glEnd();
 			break;
 		case FILLED:
 			// draw the asteroid

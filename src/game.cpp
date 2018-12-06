@@ -87,7 +87,8 @@ void Game::update() {
 				asteroids[i].pos = 2*origin - asteroids[i].pos;
 				asteroids[i].update();
 			}
-			asteroids[i].clip(this->clipWindow);
+			if(clip)
+				asteroids[i].clip(this->clipWindow);
 		}
 		this->resolveOverlaps();
 
