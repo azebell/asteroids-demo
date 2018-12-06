@@ -128,7 +128,7 @@ void Game::render() {
 
 	//Draw the Scoreboard
 
-	destroyRatio = ((float)missileCount/(float)asDestroy) * 100;
+	destroyRatio = ((float)asDestroy/(float)missileCount) * 100;
 	this->scoreboardVals.push_back(missileCount);
 	this->scoreboardVals.push_back(this->asteroids.size());
 	this->scoreboardVals.push_back(asDestroy);

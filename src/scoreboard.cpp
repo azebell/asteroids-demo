@@ -39,7 +39,7 @@ float posFactorY =(float) (height/8)*0.75;
 processTextToScreen(posFactorX, posFactorY, numMis, "Missiles Fired %.0f");                               
 processTextToScreen(posFactorX, posFactorY-40, numAs, "Asteroids Visible %.0f");
 
-processTextToScreen(posFactorX*5.50, posFaactorY, ratio, "Destroy Ratio %.3f %");
+processTextToScreen(posFactorX*5.50, posFactorY, ratio, "Destroy Ratio %.3f %");
 
 processTextToScreen(posFactorX*5.50, posFactorY-40, numDestroy, "Asteroids Struck %.0f");
 
