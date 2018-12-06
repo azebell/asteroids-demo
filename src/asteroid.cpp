@@ -93,9 +93,23 @@ void Asteroid::render(int tessControl) {
 				}				
 			}
 			else {
-				glBegin(GL_TRIANGLES);
-				for(unsigned i=0; i < tris.size(); i++) {
-					glVertex3f(tris[i].x, tris[i].y, 0.0);
+				if(this->type == POLYROID) {
+					glBegin(GL_TRIANGLES);
+					for(unsigned i=0; i < tris.size(); i++) {
+						glVertex3f(tris[i].x, tris[i].y, 0.0);
+					}
+				}
+				else if(this->type == TRIROID) {
+					glBegin(GL_TRIANGLES);
+						glVertex3f(this->Tverts[0].x, this->Tverts[0].y, 0.0);
+						glVertex3f(this->Tverts[1].x,this->Tverts[1].y,0.0);
+						glVertex3f(this->pos.x, this->pos.y, 0.0);
+						glVertex3f(this->Tverts[1].x, this->Tverts[1].y, 0.0);
+						glVertex3f(this->Tverts[2].x,this->Tverts[2].y,0.0);
+						glVertex3f(this->pos.x, this->pos.y, 0.0);
+						glVertex3f(this->Tverts[2].x, this->Tverts[2].y, 0.0);
+						glVertex3f(this->Tverts[0].x,this->Tverts[0].y,0.0);
+						glVertex3f(this->pos.x, this->pos.y, 0.0);
 				}
 			}
 			glEnd();
