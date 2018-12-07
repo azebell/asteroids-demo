@@ -12,7 +12,9 @@ public:
 	vec3 vel; // velocity
 	float theta; // rotation
 	float alpha; // rotational velocity
-	mat4 transform;
+	float area; // asteroid area
+	int clipped;
+    mat4 transform;
 	std::vector<vec3> verts; // polygon vertices
 	std::vector<vec3> Tverts; // transformed vertices
 
@@ -21,15 +23,22 @@ public:
 		TRIROID,
 		BARYROID
 	};
+	enum DrawStyle {
+		OUTLINE,
+		FILLED,
+		TRIANGLES
+	};
 
 	AsteroidType type;
+	DrawStyle drawstyle;
 
 	Asteroid(vec3 position, float radius);
 	Asteroid(vec3 position, std::vector<vec3> vertices);
 	void transformVerts();
 	void clip(std::vector<vec3> clipper);
+	void setDrawStyle(DrawStyle ds);
 	void update();
-	void render();
+	void render(int);
 };
 
 #endif // ASTEROID_H

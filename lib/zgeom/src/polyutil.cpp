@@ -1,5 +1,6 @@
 
 #include "polyutil.h"
+#include "intersect.h"
 #include "util.h"
 
 //////////////////////////////////////////////////////
@@ -76,5 +77,27 @@ int point_in_poly(vec3 p, vec3 *poly, unsigned N) {
 
 int point_in_poly(vec3 p, std::vector<vec3> poly) {
 	return point_in_poly(p, &poly[0], poly.size());
+}
+
+int poly_intersect(std::vector<vec3> A, std::vector<vec3> B) {
+	if(A.size()==0 || B.size()==0)
+		return 0;
+	vec3 intersection;
+	vec3 a1, a2, b1, b2;
+	a1 = A[A.size()-1];
+	for(unsigned i=0; i<A.size(); i++) {
+		a2 = A[i];
+		b1 = B[B.size()-1];
+		for(unsigned j=0; j<B.size(); j++) {
+			b2 = B[j];
+			//if(intersect_ss(A[i], A[i+1], B[j], B[j+1], &intersection)) {
+			if(intersect_ss(a1, a2, b1, b2, &intersection)) {
+				return 1;
+			}
+			b1 = b2;
+		}
+		a1 = a2;
+	}
+	return 0;
 }
 

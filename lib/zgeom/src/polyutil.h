@@ -33,6 +33,8 @@ int point_in_poly(vec3 p, vec3 *poly, unsigned N);
 
 int point_in_poly(vec3 p, std::vector<vec3> poly);
 
+int poly_intersect(std::vector<vec3> A, std::vector<vec3> B);
+
 #endif // __cplusplus
 
 #endif // POLYUTIL_H

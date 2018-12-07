@@ -9,8 +9,7 @@ std::vector<Asteroid> bust(Asteroid A) {
 		return bustTris(A);
 	}
 	else if(A.type == Asteroid::TRIROID) {
-		// TODO call bustBarycentric function
-		return std::vector<Asteroid>();
+		return bustBarycentric(A);
 	}
 	return std::vector<Asteroid>();
 }
@@ -60,12 +59,47 @@ std::vector<Asteroid> bustTris(Asteroid A) {
 std::vector<Asteroid> bustBarycentric(Asteroid A) {
 	std::vector<Asteroid> result;
 
-	// TODO create the barycentric tris
-	// since each previously busted asteroid turns
-	// into triangles with their centers at their
-	// relative origin, we simply need to bust these
-	// asteroids by creating triangles with each edge
-	// and two lines connecting it to the origin.
+	mat4 T = mat4Identity();
+	mat4RotateZ(&T, A.theta);
+	A.Tverts = applyTransform(T, A.verts);
+
+	std::vector<vec3> verts;
+	vec3 centroid;
+
+	centroid = {
+		(A.Tverts[0].x + A.Tverts[1].x)/3.0f,
+		(A.Tverts[0].y + A.Tverts[1].y)/3.0f
+	};
+	verts.push_back( A.Tverts[0] - centroid);
+	verts.push_back( A.Tverts[1] - centroid);
+	verts.push_back( -centroid );
+	result.emplace_back(A.pos+centroid, verts);
+	result[0].type = Asteroid::BARYROID;
+	result[0].vel = vec3Mag(result[0].vel) * vec3Unit(centroid);
+	verts.clear();
+
+	centroid = {
+		(A.Tverts[1].x + A.Tverts[2].x)/3.0f,
+		(A.Tverts[1].y + A.Tverts[2].y)/3.0f
+	};
+	verts.push_back( A.Tverts[1] - centroid);
+	verts.push_back( A.Tverts[2] - centroid);
+	verts.push_back( -centroid );
+	result.emplace_back(A.pos+centroid, verts);
+	result[1].type = Asteroid::BARYROID;
+	result[1].vel = vec3Mag(result[1].vel) * vec3Unit(centroid);
+	verts.clear();
+
+	centroid = {
+		(A.Tverts[2].x + A.Tverts[0].x)/3.0f,
+		(A.Tverts[2].y + A.Tverts[0].y)/3.0f
+	};
+	verts.push_back( A.Tverts[2] - centroid);
+	verts.push_back( A.Tverts[0] - centroid);
+	verts.push_back( centroid );
+	result.emplace_back(A.pos+centroid, verts);
+	result[2].type = Asteroid::BARYROID;
+	result[2].vel = vec3Mag(result[2].vel) * vec3Unit(centroid);
 
 	return result;
 }

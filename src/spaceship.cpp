@@ -27,7 +27,9 @@ void Spaceship::update() {
 
 
 void Spaceship::render() {
+	glColor3ub(255,255,255);
 	// draw the Spaceship
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_POLYGON);
 	for(unsigned i=0; i < this->Tverts.size(); i++) {
 		glVertex3f(this->Tverts[i].x, this->Tverts[i].y, 0.0);
