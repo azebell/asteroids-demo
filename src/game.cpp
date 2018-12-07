@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
+#include <ctime>
 
 Game::Game() {
 
@@ -65,13 +66,28 @@ void Game::init(int window_width, int window_height, float octRadius) {
 	this->asDestroy = 0;
 	this->hitAsteroidType = -1;
 
-    this->update();
-    setPaused(true);
+	lives = 3;	//give the player 3 lives
+	hitTimer = 0;
 
+	this->update();
+	setPaused(true);
 }
 
 void Game::update() {
 	if(getPaused() == false) { //stops updating if user pauses
+		if(lives == 0) {
+			//TODO : Game Over screen
+			std::cout << "GAME OVER" << std::endl;
+		}
+	
+		if(hitTimer > 0.0){				//handles player hit cooldown
+			float currTime = (float)clock();
+			hitTimer -= (currTime - startTime) / CLOCKS_PER_SEC;
+		}
+		else {
+			spaceship.hit = false;
+		}
+
 		for(unsigned i=0; i<this->missiles.size(); i++) {
 			this->missiles[i].update();
 			if( checkClipping(this->missiles[i].Tverts) ) {
@@ -146,8 +162,10 @@ void Game::render() {
 	this->scoreboardVals.push_back(score);
 	this->hitAsteroidType = -1;
 	
-	drawScoreboard(this->scoreboardVals, 1000, 1000, destroyRatio);
+	drawScoreboard(this->scoreboardVals, 1000, 1000, destroyRatio);		//***TODO redefine window size variables with constants from Main.cc
 	this->scoreboardVals.clear();
+
+	drawLives(lives, 1000, 1000);
 
 	swapBuffers();
 }
@@ -184,8 +202,8 @@ void Game::resolveCollisions() {
 }
 
 void Game::resolveOverlaps() {
-	for(unsigned i=0; i<this->asteroids.size(); i++) {
-		for(unsigned j=0; j<this->asteroids.size(); j++) {
+	for(unsigned i=0; i<this->asteroids.size(); i++) {		//check asteorid collisions
+		for(unsigned j=0; j<this->asteroids.size(); j++) {	//check collisions with other asteroids
 			if(i==j)
 				continue;
 			if(poly_intersect(asteroids[i].Tverts, asteroids[j].Tverts)) {
@@ -193,6 +211,16 @@ void Game::resolveOverlaps() {
 					asteroids[i].setDrawStyle(Asteroid::FILLED);
 				else
 					asteroids[j].setDrawStyle(Asteroid::FILLED);
+			}
+		}
+
+		if(poly_intersect(asteroids[i].Tverts, spaceship.Tverts)) {	//check collisions with spaceship
+			if(lives > 0 && hitTimer <= 0.0) {			
+				lives--;		//decrease player lives
+				hitTimer = 120.0;	 //active player hit cooldown for num of secs
+				startTime = (float)clock();
+
+				spaceship.hit = true;	//change spaceship color to indicate hit
 			}
 		}
 	}
