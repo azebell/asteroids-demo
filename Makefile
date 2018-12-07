@@ -1,4 +1,3 @@
-
 SRCDIR = src
 OBJDIR = obj
 INCDIR = include
@@ -45,3 +44,5 @@ pristine: clean
 	rm -rf include/zgeom*
 	$(MAKE) pristine -C lib/zgeom
 
+run:
+	./bin/demo
