@@ -222,28 +222,29 @@ void Game::resolveCollisions() {
 }
 
 void Game::resolveOverlaps() {
-    for(unsigned i=0; i<this->asteroids.size(); i++) {		//check asteorid collisions
-        for(unsigned j=0; j<this->asteroids.size(); j++) {	//check collisions with other asteroids
-            if(i==j)
-                continue;
-            if(poly_intersect(asteroids[i].Tverts, asteroids[j].Tverts)) {
-                if(asteroids[i].area < asteroids[j].area)
-                    asteroids[i].setDrawStyle(Asteroid::FILLED);
-                else
-                    asteroids[j].setDrawStyle(Asteroid::FILLED);
-            }
-        }
+	for(unsigned i=0; i<this->asteroids.size(); i++) {		//check asteorid collisions
+		for(unsigned j=0; j<this->asteroids.size(); j++) {	//check collisions with other asteroids
+			if(i==j) {
+				asteroids[i].setDrawStyle(Asteroid::FILLED);
+				continue;
+			}
+			if(poly_intersect(asteroids[i].Tverts, asteroids[j].Tverts)) {
+				if(asteroids[i].area < asteroids[j].area)
+					asteroids[i].setDrawStyle(Asteroid::FILLED);
+				else
+					asteroids[j].setDrawStyle(Asteroid::FILLED);
+			}
+		}
 
-        if(poly_intersect(asteroids[i].Tverts, spaceship.Tverts)) {	//check collisions with spaceship
-            if(lives > 0 && hitTimer <= 0.0) {			
-                lives--;		//decrease player lives
-                hitTimer = 120.0;	 //active player hit cooldown for num of secs
-                startTime = (float)clock();
+		if(poly_intersect(asteroids[i].Tverts, spaceship.Tverts)) {	//check collisions with spaceship
+			if(lives > 0 && hitTimer <= 0.0) {			
+				lives--;		//decrease player lives
+				hitTimer = 120.0;	 //active player hit cooldown for num of secs
+				startTime = (float)clock();
 
-                spaceship.hit = true;	//change spaceship color to indicate hit
-            }
-        }
-    }
+				spaceship.hit = true;	//change spaceship color to indicate hit
+			}
+		}
+	}
 }
-
 
