@@ -10,10 +10,10 @@
 class Game {
 private:
 public:
-    const static int WINDOW_POSITION_X = 500;
-    const static int WINDOW_POSITION_Y = 5;
-    const static int WINDOW_MAX_X = 1000;
-    const static int WINDOW_MAX_Y = 1000;
+	const static int WINDOW_POSITION_X = 500;
+	const static int WINDOW_POSITION_Y = 5;
+	const static int WINDOW_MAX_X = 1000;
+	const static int WINDOW_MAX_Y = 1000;
 
 	vec3 origin; // will be the center of octagon
 	std::vector<vec3> clipWindow; // clipping window
@@ -28,7 +28,7 @@ public:
 	int asDestroy;
 	float destroyRatio;
 	float octRadius;
-    int hitAsteroidType;
+	int hitAsteroidType;
 	int score;
 
 	int lives;

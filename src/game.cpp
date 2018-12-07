@@ -82,6 +82,8 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
     this->update();
     setPaused(true);
+
+    readHighScoreFile();
 }
 
 void Game::update() {

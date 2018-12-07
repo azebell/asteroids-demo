@@ -3,7 +3,13 @@
 #include <stdio.h>
 #include <vector>
 #include <iostream>
+#include <sstream>
+#include <fstream>
+#include <string>
 //
+
+using namespace std; 
+
 void drawString(float x, float y, void *font, const char *text) {
 //define a character to hold chars of string
     const char *c;
@@ -71,4 +77,28 @@ void drawLives(int lives, int height, int width){
 		glEnd();
 	}
 	glColor3ub(0,255,0);		//change color back to green
+}
+
+void updateHighScoreFile()
+{
+	string filename = "src/HighScores.txt";
+        ofstream myfile;
+	myfile.open(filename);
+	myfile << "hello world" << filename;
+	myfile.close(); 
+}
+
+void readHighScoreFile()
+{
+	ifstream infile;
+	infile.open("HighScores.txt");
+
+	if(!infile.is_open())		//checks if file is available
+	{
+		string filename = "src/HighScores.txt";
+       		ofstream myfile;
+		myfile.open(filename);
+		myfile << "hello world" << filename;
+		myfile.close(); 
+	}
 }
