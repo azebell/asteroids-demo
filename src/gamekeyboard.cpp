@@ -35,7 +35,6 @@ void Game::keyDown(unsigned char key, int x, int y) {
 				this->tessControl = 0;
 			}
 			break;
-		
 		case 'q':
 		case 'Q':
 			exit(0);

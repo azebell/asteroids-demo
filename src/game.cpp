@@ -205,8 +205,10 @@ void Game::resolveCollisions() {
 void Game::resolveOverlaps() {
 	for(unsigned i=0; i<this->asteroids.size(); i++) {		//check asteorid collisions
 		for(unsigned j=0; j<this->asteroids.size(); j++) {	//check collisions with other asteroids
-			if(i==j)
+			if(i==j) {
+				asteroids[i].setDrawStyle(Asteroid::FILLED);
 				continue;
+			}
 			if(poly_intersect(asteroids[i].Tverts, asteroids[j].Tverts)) {
 				if(asteroids[i].area < asteroids[j].area)
 					asteroids[i].setDrawStyle(Asteroid::FILLED);
