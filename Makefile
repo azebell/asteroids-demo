@@ -46,3 +46,8 @@ pristine: clean
 
 run:
 	./bin/demo
+
+test:
+	$(MAKE) pristine
+	make
+	$(MAKE) run

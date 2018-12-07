@@ -35,12 +35,15 @@ float numAs = (float) values[1];
 float numDestroy = (float) values[2];
 float posFactorX = ((float)width/8);
 float posFactorY =(float) (height/8)*0.75;
+float totscore = (float)values[3];
 
-processTextToScreen(posFactorX, posFactorY, numMis, "Missiles Fired %.0f");                               
-processTextToScreen(posFactorX, posFactorY-40, numAs, "Asteroids Visible %.0f");
+processTextToScreen(posFactorX, posFactorY, numMis, "Missiles Fired : %.0f");                               
+processTextToScreen(posFactorX, posFactorY-40, numAs, "Asteroids Visible : %.0f");
 
-processTextToScreen(posFactorX*5.50, posFactorY, ratio, "Destroy Ratio %.3f %");
+processTextToScreen(posFactorX*5.50, posFactorY, ratio, "Destroy Ratio : %.2f %");
 
-processTextToScreen(posFactorX*5.50, posFactorY-40, numDestroy, "Asteroids Struck %.0f");
+processTextToScreen(posFactorX*5.50, posFactorY-40, numDestroy, "Asteroids Struck : %.0f");
+
+processTextToScreen(posFactorX*5.50, posFactorY-80, totscore, "Total Score : %.0f");
 
 }
