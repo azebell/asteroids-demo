@@ -32,6 +32,8 @@ void Game::init(int window_width, int window_height, float octRadius) {
     // generate some asteroids
     // make placement random
     this->tessControl = 0;
+    this->spaceship.pos = origin;
+    this->spaceship.update();
 
     srand(time(NULL)); // seed the rand() function with the time
 
@@ -52,6 +54,10 @@ void Game::init(int window_width, int window_height, float octRadius) {
                 i--;
             }
         }
+        if(poly_intersect(spaceship.Tverts, asteroids[i].Tverts) ) {
+        	this->asteroids.erase(asteroids.begin()+i);
+        	i--;
+        }
     }
 
     // create the clipping window
@@ -66,7 +72,6 @@ void Game::init(int window_width, int window_height, float octRadius) {
     }
 
 
-    this->spaceship.pos = origin;
     this->missileCount = 0;
     this->destroyRatio = 0.0;
     this->asDestroy = 0;
