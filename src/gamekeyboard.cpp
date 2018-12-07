@@ -54,10 +54,11 @@ void Game::keyDown(unsigned char key, int x, int y) {
 			exit(0);
 			break;
 		case 32: // Spacebar
+			if(gameover == false){
 			missiles.push_back(
 				Missile(this->spaceship.pos, this->spaceship.theta)
 			); 
-			missileCount++;
+			missileCount++;}
 			break;
 		default:
 			break;
