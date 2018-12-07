@@ -12,6 +12,8 @@
 #include <cmath>
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
+
 Game::Game() {
 
 }
@@ -61,6 +63,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 	this->missileCount = 0;
 	this->destroyRatio = 0.0;
 	this->asDestroy = 0;
+	this->hitAsteroidType = -1;
 
     this->update();
     setPaused(true);
@@ -130,10 +133,18 @@ void Game::render() {
 
 	//Draw the Scoreboard
 
-	destroyRatio = ((float)asDestroy/(float)missileCount) * 100;
+	if(missileCount > 0.0)
+		destroyRatio = ((float)asDestroy/(float)missileCount) * 100;
+	else
+		destroyRatio = 0.0;
+
 	this->scoreboardVals.push_back(missileCount);
 	this->scoreboardVals.push_back(this->asteroids.size());
 	this->scoreboardVals.push_back(asDestroy);
+
+	score = score + ((hitAsteroidType+1)*50);	//if player hits asteroid update score based on size
+	this->scoreboardVals.push_back(score);
+	this->hitAsteroidType = -1;
 	
 	drawScoreboard(this->scoreboardVals, 1000, 1000, destroyRatio);
 	this->scoreboardVals.clear();
@@ -157,7 +168,9 @@ int Game::checkClipping(std::vector<vec3> vertices) {
 void Game::resolveCollisions() {
 	for(unsigned k=0; k<this->missiles.size(); k++) {
 		for(unsigned i=0; i<this->asteroids.size(); i++) {
-			if(poly_intersect(missiles[k].Tverts, this->asteroids[i].Tverts)) {
+			if(poly_intersect(missiles[k].Tverts, this->asteroids[i].Tverts)) {		//missile hits an asteroid
+
+				this->hitAsteroidType = asteroids[i].type;
 				std::vector<Asteroid> bustRoids = bust(asteroids[i]);
 				this->asteroids.insert(this->asteroids.end(), bustRoids.begin(), bustRoids.end());
 				this->asteroids.erase(this->asteroids.begin()+i); 

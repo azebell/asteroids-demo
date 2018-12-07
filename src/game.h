@@ -21,6 +21,8 @@ public:
         int missileCount;
 	int asDestroy;
 	float destroyRatio;
+	int hitAsteroidType;
+	int score;
 	// TODO 
 	// add Scoreboard object to game
 
