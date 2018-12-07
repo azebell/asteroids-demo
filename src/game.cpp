@@ -26,6 +26,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
         clipWindow.clear();
     }
     
+    this->octRadius = octRadius;
     this->origin = { window_width/2.0f, window_height/2.0f };
 
     // generate some asteroids
@@ -146,7 +147,7 @@ void Game::render() {
 	} else if(getPaused() == true && getStart() == false && lives > 0) {
 		displayText("Paused: Press P to continue"); // pause message
 	} else if(getPaused() == true && getStart() == false && lives == 0) {
-		displayText("Game Over, Press R to Restart");
+		displayText("Game Over, Press R to Restart, Q to Quit");
 	}
 
     // Draw the Spaceship

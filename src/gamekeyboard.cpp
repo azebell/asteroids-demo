@@ -29,10 +29,12 @@ void Game::keyDown(unsigned char key, int x, int y) {
         case 'R':
             if(reset == false){
                 reset = true;
-                init(1000,1000,400);
+                paused = false;
+                init(WINDOW_MAX_X,WINDOW_MAX_Y,octRadius);
                 update();
                 render();
                 reset = false;
+                start = true;
             }
             break;
 		case 't':

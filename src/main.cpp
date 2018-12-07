@@ -13,11 +13,6 @@
 #include "gamekeyboard.h"
 
 // Specify the values to place and size the window on the screen
-const int WINDOW_POSITION_X = 500;
-const int WINDOW_POSITION_Y = 5;
-const int WINDOW_MAX_X = 1000;
-const int WINDOW_MAX_Y = 1000;
-
 const int FRAMERATE = 1000.0/60.0;
 
 
@@ -52,17 +47,17 @@ void specialKeyUp(int key, int x, int y) { g.specialKeyUp(key, x, y); }
 int main(int argc, char** argv) {
 
 	setupGlut(
-		WINDOW_POSITION_X,
-		WINDOW_POSITION_Y,
-		WINDOW_MAX_X,
-		WINDOW_MAX_Y
+		Game::WINDOW_POSITION_X,
+		Game::WINDOW_POSITION_Y,
+		Game::WINDOW_MAX_X,
+		Game::WINDOW_MAX_Y
 	);
 
 	float radius = 400.0;
 	if(argc >= 2)
 		radius = atof(argv[1])/2.0;
 
-	g.init(WINDOW_MAX_X, WINDOW_MAX_Y, radius);
+	g.init(Game::WINDOW_MAX_X, Game::WINDOW_MAX_Y, radius);
 	currTime = 0;
 	accumulator = 0;
         
