@@ -76,8 +76,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 void Game::update() {
 	if(getPaused() == false) { //stops updating if user pauses
 		if(lives == 0) {
-			//TODO : Game Over screen
-			std::cout << "GAME OVER" << std::endl;
+			setPaused(true);
 		}
 	
 		if(hitTimer > 0.0){				//handles player hit cooldown
@@ -138,9 +137,11 @@ void Game::render() {
 
 
 	if(getPaused() == true && getStart() == true) {
-		displayText("Press s to start the game"); // starting condition message 
-	} else if(getPaused() == true && getStart() == false) {
-		displayText("Paused: Press p to continue"); // pause message
+		displayText("Press S to Start the Game"); // starting condition message 
+	} else if(getPaused() == true && getStart() == false && lives > 0) {
+		displayText("Paused: Press P to continue"); // pause message
+	} else if(getPaused() == true && getStart() == false && lives == 0) {
+		displayText("Game Over, Press R to Restart");
 	}
 
 
