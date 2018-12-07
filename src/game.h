@@ -15,12 +15,17 @@ public:
 
 	std::vector<Asteroid> asteroids;
 	int tessControl;
-    Spaceship spaceship;
+	Spaceship spaceship;
 	std::vector<Missile> missiles;
 	std::vector<int> scoreboardVals;
         int missileCount;
 	int asDestroy;
 	float destroyRatio;
+	int hitAsteroidType;
+	int score;
+	int lives;
+	float startTime;
+	float hitTimer;
 	// TODO 
 	// add Scoreboard object to game
 

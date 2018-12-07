@@ -13,6 +13,7 @@ Spaceship::Spaceship(vec3 position) : pos(position) {
 	this->verts.push_back( {  20.0,   0.0 });
 	this->verts.push_back( { -10.0, -10.0 });
 	this->Tverts = verts;
+	this->hit = false;
 }
 
 // update Spaceship with new rotation direction
@@ -27,7 +28,11 @@ void Spaceship::update() {
 
 
 void Spaceship::render() {
-	glColor3ub(255,255,255);
+	if(hit)
+		glColor3ub(255,0,0);	//change color to indicate damage
+	else
+		glColor3ub(255,255,255);
+
 	// draw the Spaceship
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_POLYGON);

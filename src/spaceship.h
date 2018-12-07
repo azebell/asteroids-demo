@@ -15,6 +15,7 @@ public:
 	mat4 transform;
 	std::vector<vec3> verts; // polygon vertices
 	std::vector<vec3> Tverts; // transformed vertices
+	bool hit;
 
 	Spaceship();
 	Spaceship(vec3 position);
