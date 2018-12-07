@@ -1,4 +1,3 @@
-
 #include "gameState.h"
 #include "game.h"
 #include <GL/glut.h>
@@ -8,6 +7,7 @@
 
 static bool paused = false;
 static bool start = true;
+static bool reset = false;
 
 void Game::keyDown(unsigned char key, int x, int y) {
 	switch(key) {
@@ -25,7 +25,16 @@ void Game::keyDown(unsigned char key, int x, int y) {
 				displayText("Paused, Press P to continue playing");	
 			}
 			break;
-
+        case 'r':
+        case 'R':
+            if(reset == false){
+                reset = true;
+                init(1000,1000,400);
+                update();
+                render();
+                reset = false;
+            }
+            break;
 		case 't':
 		case 'T':
 			if(this->tessControl == 0){
@@ -95,10 +104,22 @@ bool getStart() {
 	return start;
 }
 
+bool getReset(){
+    return reset;
+} 
+
+// Sets the pause state flag
 void setPaused(int value){
     paused = value;
 }
 
+// Sets the start state flag
 void setStart(int value){
     start = value;
 }
+
+// Sets the reset state flag
+void setReset(int value){
+    reset = value;
+}
+
