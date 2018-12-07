@@ -76,7 +76,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
     this->destroyRatio = 0.0;
     this->asDestroy = 0;
     this->hitAsteroidType = -1;
-
+    this->score = 0;
     lives = 3;	//give the player 3 lives
     hitTimer = 0;
 
@@ -163,6 +163,10 @@ void Game::render() {
 		displayText("Paused: Press P to continue"); // pause message
 	} else if(getGameOver() == true && getStart() == false && lives == 0) {
 		displayText("Game Over, Press R to Restart");
+		if(score == highscore){
+			processTextToScreen((float) WINDOW_MAX_X*.38, (float) WINDOW_MAX_Y*.45, highscore, "NEW HIGH SCORE : %.0f");
+		}
+		
 	}
 
 	// Draw the Spaceship
@@ -181,10 +185,14 @@ void Game::render() {
 	this->scoreboardVals.push_back(asDestroy);
 
 	score = score + ((hitAsteroidType+1)*50);	//if player hits asteroid update score based on size
-	this->scoreboardVals.push_back(score);
+	if(score > highscore)
+	{
+		highscore = score;
+	}
+	this->scoreboardVals.push_back(score);	
 	this->hitAsteroidType = -1;
 
-	drawScoreboard(this->scoreboardVals, 1000, 1000, destroyRatio);		//***TODO redefine window size variables with constants from Main.cc
+	drawScoreboard(this->scoreboardVals, WINDOW_MAX_X, WINDOW_MAX_Y, destroyRatio);		//***TODO redefine window size variables with constants from Main.cc
 	this->scoreboardVals.clear();
 
 	drawLives(lives, 1000, 1000);

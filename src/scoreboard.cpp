@@ -22,7 +22,6 @@ void drawString(float x, float y, void *font, const char *text) {
 }
 
 void processTextToScreen(float x, float y, float number, const char *textFormat) {
-//std::cout << "Start process text" << std::endl;
 //define memory to hold string
     char charString[20];
 //  put data in string
@@ -31,7 +30,7 @@ void processTextToScreen(float x, float y, float number, const char *textFormat)
 //drawString()...
     drawString(x, y, GLUT_BITMAP_TIMES_ROMAN_24, charString);
 
-}                                                                                  //TODO
+}                                                                                 
 
 
 void drawScoreboard(std::vector<int> values, int height, int width, float ratio) {
@@ -78,6 +77,7 @@ void drawLives(int lives, int height, int width){
 	}
 	glColor3ub(0,255,0);		//change color back to green
 }
+
 
 void updateHighScoreFile()
 {

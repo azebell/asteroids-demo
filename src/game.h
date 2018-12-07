@@ -7,6 +7,7 @@
 #include "zgeom.h"
 #include <vector>
 
+
 class Game {
 private:
 public:
@@ -30,10 +31,11 @@ public:
 	float octRadius;
 	int hitAsteroidType;
 	int score;
-
 	int lives;
 	float startTime;
 	float hitTimer;
+	int highscore;
+//	std::vector<int> highscore;
 
 	Game();
 	void init(int window_width, int window_height, float octRadius);
