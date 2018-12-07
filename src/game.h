@@ -17,17 +17,17 @@ public:
 	int tessControl;
 	Spaceship spaceship;
 	std::vector<Missile> missiles;
+
 	std::vector<int> scoreboardVals;
         int missileCount;
 	int asDestroy;
 	float destroyRatio;
 	int hitAsteroidType;
 	int score;
+
 	int lives;
 	float startTime;
 	float hitTimer;
-	// TODO 
-	// add Scoreboard object to game
 
 	Game();
 	void init(int window_width, int window_height, float octRadius);
