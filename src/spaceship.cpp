@@ -9,9 +9,9 @@ Spaceship::Spaceship() : Spaceship({0.0,0.0,0.0}) {
 Spaceship::Spaceship(vec3 position) : pos(position) {
 	this->vel = {0.0,0.0,0.0};
 	this->verts.push_back( {   0.0,   0.0 });
-	this->verts.push_back( { -10.0,  10.0 });
+	this->verts.push_back( { -10.0,  -10.0 });
 	this->verts.push_back( {  20.0,   0.0 });
-	this->verts.push_back( { -10.0, -10.0 });
+	this->verts.push_back( { -10.0, 10.0 });
 	this->Tverts = verts;
 	this->hit = false;
 }

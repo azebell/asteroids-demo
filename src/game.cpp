@@ -86,8 +86,16 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
 void Game::update() {
 	if(getPaused() == false) { //stops updating if user pauses
-		if(lives == 0) {
-			setPaused(true);
+		if(lives == 0 && !getGameOver()) {
+			Asteroid shipToAst = Asteroid(spaceship.pos, spaceship.verts);		//convert ship to burst asteroid
+
+			std::vector<Asteroid> bustRoids = bust(shipToAst);		//bust ship asteroid
+			std::vector<Asteroid> bustRoids2 = bust(bustRoids[0]);
+			std::vector<Asteroid> bustRoids3 = bust(bustRoids[1]);
+			
+               		this->asteroids.insert(this->asteroids.begin(), bustRoids2.begin(), bustRoids2.end());
+			this->asteroids.insert(this->asteroids.begin(), bustRoids3.begin(), bustRoids3.end());
+			setGameOver(true);
 		}
 	
 		if(hitTimer > 0.0){				//handles player hit cooldown
@@ -127,58 +135,59 @@ void Game::update() {
 }
 
 void Game::render() {
-    clearScreen();
+	clearScreen();
 
-    // draw the clipping window
-    glBegin(GL_LINE_LOOP);
-    for(unsigned i=0; i < this->clipWindow.size(); i++) {
-        glVertex3f(this->clipWindow[i].x, this->clipWindow[i].y, 0.0);
-    }
-    glEnd();
+	// draw the clipping window
+	glBegin(GL_LINE_LOOP);
+	for(unsigned i=0; i < this->clipWindow.size(); i++) {
+		glVertex3f(this->clipWindow[i].x, this->clipWindow[i].y, 0.0);
+	}
+	glEnd();
 
-    // draw the asteroids
-    for(unsigned i=0; i < this->asteroids.size(); i++) {
-        this->asteroids[i].render(this->tessControl);
-    }
+	// draw the asteroids
+	for(unsigned i=0; i < this->asteroids.size(); i++) {
+		this->asteroids[i].render(this->tessControl);
+	}
 
-    // Draw the missiles
-    for(unsigned i=0; i < this->missiles.size(); i++) {
-        this->missiles[i].render();
-    }
+	// Draw the missiles
+	for(unsigned i=0; i < this->missiles.size(); i++) {
+		this->missiles[i].render();
+	}
 
 
 	if(getPaused() == true && getStart() == true) {
 		displayText("Press S to Start the Game"); // starting condition message 
 	} else if(getPaused() == true && getStart() == false && lives > 0) {
 		displayText("Paused: Press P to continue"); // pause message
-	} else if(getPaused() == true && getStart() == false && lives == 0) {
-		displayText("Game Over, Press R to Restart, Q to Quit");
+	} else if(getGameOver() == true && getStart() == false && lives == 0) {
+		displayText("Game Over, Press R to Restart");
 	}
 
-    // Draw the Spaceship
-    this->spaceship.render();
+	// Draw the Spaceship
+	if(!getGameOver())
+		this->spaceship.render();
 
-    //Draw the Scoreboard
+	//Draw the Scoreboard
 
-    if(missileCount > 0.0)
-        destroyRatio = ((float)asDestroy/(float)missileCount) * 100;
-    else
-        destroyRatio = 0.0;
+	if(missileCount > 0.0)
+		destroyRatio = ((float)asDestroy/(float)missileCount) * 100;
+	else
+		destroyRatio = 0.0;
 
-    this->scoreboardVals.push_back(missileCount);
-    this->scoreboardVals.push_back(this->asteroids.size());
-    this->scoreboardVals.push_back(asDestroy);
+	this->scoreboardVals.push_back(missileCount);
+	this->scoreboardVals.push_back(this->asteroids.size());
+	this->scoreboardVals.push_back(asDestroy);
 
-    score = score + ((hitAsteroidType+1)*50);	//if player hits asteroid update score based on size
-    this->scoreboardVals.push_back(score);
-    this->hitAsteroidType = -1;
+	score = score + ((hitAsteroidType+1)*50);	//if player hits asteroid update score based on size
+	this->scoreboardVals.push_back(score);
+	this->hitAsteroidType = -1;
 
-    drawScoreboard(this->scoreboardVals, 1000, 1000, destroyRatio);		//***TODO redefine window size variables with constants from Main.cc
-    this->scoreboardVals.clear();
+	drawScoreboard(this->scoreboardVals, 1000, 1000, destroyRatio);		//***TODO redefine window size variables with constants from Main.cc
+	this->scoreboardVals.clear();
 
-    drawLives(lives, 1000, 1000);
+	drawLives(lives, 1000, 1000);
 
-    swapBuffers();
+	swapBuffers();
 }
 
 //int Game::checkClipping(Asteroid A) {

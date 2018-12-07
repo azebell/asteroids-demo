@@ -7,6 +7,7 @@
 
 static bool paused = false;
 static bool start = true;
+static bool gameover = false;
 static bool reset = false;
 
 void Game::keyDown(unsigned char key, int x, int y) {
@@ -31,6 +32,7 @@ void Game::keyDown(unsigned char key, int x, int y) {
                 reset = true;
                 paused = false;
                 init(WINDOW_MAX_X,WINDOW_MAX_Y,octRadius);
+				gameover = false;
                 update();
                 render();
                 reset = false;
@@ -107,21 +109,29 @@ bool getStart() {
 }
 
 bool getReset(){
-    return reset;
+	return reset;
 } 
+
+bool getGameOver(){
+	return gameover;
+}
 
 // Sets the pause state flag
 void setPaused(int value){
-    paused = value;
+	paused = value;
 }
 
 // Sets the start state flag
 void setStart(int value){
-    start = value;
+	start = value;
 }
 
 // Sets the reset state flag
 void setReset(int value){
-    reset = value;
+	reset = value;
+}
+
+void setGameOver(int value){
+	gameover = value;
 }
 
