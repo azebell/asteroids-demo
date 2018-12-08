@@ -6,7 +6,7 @@ BINDIR = bin
 
 CC       = gcc
 CXX      = g++
-CXXFLAGS = -std=c++11 -Wall -I$(INCDIR)
+CXXFLAGS = -std=c++11 -Wall -I$(INCDIR) -O2
 LDLIBS   = -lglut -lGL -lGLU -lm -L$(LIBDIR) -lzgeom
 
 SOURCES  := $(wildcard $(SRCDIR)/*.cpp)
