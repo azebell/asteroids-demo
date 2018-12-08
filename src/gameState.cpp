@@ -19,5 +19,5 @@ void displayText(std::string textToDisplay)
 {
 	
     	glColor3ub(255, 255, 255);
-    	drawMessage(400.0, 500.0, GLUT_BITMAP_HELVETICA_18, textToDisplay.c_str()); 
+    	drawMessage(380.0, 550.0, GLUT_BITMAP_HELVETICA_18, textToDisplay.c_str()); 
 }

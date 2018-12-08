@@ -10,6 +10,11 @@
 class Game {
 private:
 public:
+    const static int WINDOW_POSITION_X = 500;
+    const static int WINDOW_POSITION_Y = 5;
+    const static int WINDOW_MAX_X = 1000;
+    const static int WINDOW_MAX_Y = 1000;
+
 	vec3 origin; // will be the center of octagon
 	std::vector<vec3> clipWindow; // clipping window
 
@@ -17,17 +22,18 @@ public:
 	int tessControl;
 	Spaceship spaceship;
 	std::vector<Missile> missiles;
+
 	std::vector<int> scoreboardVals;
         int missileCount;
 	int asDestroy;
 	float destroyRatio;
-	int hitAsteroidType;
+	float octRadius;
+    int hitAsteroidType;
 	int score;
+
 	int lives;
 	float startTime;
 	float hitTimer;
-	// TODO 
-	// add Scoreboard object to game
 
 	Game();
 	void init(int window_width, int window_height, float octRadius);
