@@ -41,7 +41,7 @@ void Game::init(int window_width, int window_height, float octRadius, int popula
     for(int i=0; i<populace; i++) {
         float rando = ((rand()%(int)octRadius)*1.5) - octRadius/1.3; // x position rng
         float rando2 = ((rand()%(int)octRadius)*1.5) - octRadius/1.3; // y position rng
-        float arearando = ((rand()%10)) + 5;             // asteroid area rng
+        float arearando = ((rand()%5)) + 10;             // asteroid area rng
 
         // place dem asteroids randomly son
         Asteroid a( (vec3) {this->origin.x + rando, this->origin.y + rando2} , arearando );
