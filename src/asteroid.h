@@ -12,6 +12,7 @@ public:
 	vec3 vel; // velocity
 	float theta; // rotation
 	float alpha; // rotational velocity
+	float radius; // rough radius
 	float area; // asteroid area
 	int clipped;
     mat4 transform;

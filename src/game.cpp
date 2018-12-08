@@ -234,16 +234,19 @@ void Game::resolveCollisions() {
 
 void Game::resolveOverlaps() {
 	for(unsigned i=0; i<this->asteroids.size(); i++) {		//check asteorid collisions
+		//asteroids[i].setDrawStyle(Asteroid::FILLED);
 		for(unsigned j=0; j<this->asteroids.size(); j++) {	//check collisions with other asteroids
 			if(i==j) {
-				asteroids[i].setDrawStyle(Asteroid::FILLED);
+				//asteroids[i].setDrawStyle(Asteroid::FILLED); // this just sets everything to filled, not good
 				continue;
 			}
-			if(poly_intersect(asteroids[i].Tverts, asteroids[j].Tverts)) {
-				if(asteroids[i].area < asteroids[j].area)
-					asteroids[i].setDrawStyle(Asteroid::FILLED);
-				else
-					asteroids[j].setDrawStyle(Asteroid::FILLED);
+			if( vec3Mag(asteroids[i].pos - asteroids[j].pos) < asteroids[i].radius+asteroids[j].radius ) { // check that the bounding circles intersect
+				if(poly_intersect(asteroids[i].Tverts, asteroids[j].Tverts)) {
+					if(asteroids[i].area < asteroids[j].area)
+						asteroids[i].setDrawStyle(Asteroid::FILLED);
+					else
+						asteroids[j].setDrawStyle(Asteroid::FILLED);
+				}
 			}
 		}
 
