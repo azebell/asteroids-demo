@@ -45,7 +45,6 @@ void specialKeyUp(int key, int x, int y) { g.specialKeyUp(key, x, y); }
 
 
 int main(int argc, char** argv) {
-
 	setupGlut(
 		Game::WINDOW_POSITION_X,
 		Game::WINDOW_POSITION_Y,

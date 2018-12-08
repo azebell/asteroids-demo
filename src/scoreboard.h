@@ -6,5 +6,8 @@ void processTextToScreen(float x, float y, float number, const char *textFormat)
 void drawScoreboard(std::vector<int> values, int height, int width, float ratio);
 void drawLives(int lives, int height, int width);
 
+void updateHighScoreFile();
+void readHighScoreFile();
+
 #endif // SCOREBOARD_H
 

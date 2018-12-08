@@ -3,7 +3,13 @@
 #include <stdio.h>
 #include <vector>
 #include <iostream>
+#include <sstream>
+#include <fstream>
+#include <string>
 //
+
+using namespace std; 
+
 void drawString(float x, float y, void *font, const char *text) {
 //define a character to hold chars of string
     const char *c;
@@ -16,7 +22,6 @@ void drawString(float x, float y, void *font, const char *text) {
 }
 
 void processTextToScreen(float x, float y, float number, const char *textFormat) {
-//std::cout << "Start process text" << std::endl;
 //define memory to hold string
     char charString[20];
 //  put data in string
@@ -25,7 +30,7 @@ void processTextToScreen(float x, float y, float number, const char *textFormat)
 //drawString()...
     drawString(x, y, GLUT_BITMAP_TIMES_ROMAN_24, charString);
 
-}                                                                                  //TODO
+}                                                                                 
 
 
 void drawScoreboard(std::vector<int> values, int height, int width, float ratio) {
@@ -71,4 +76,29 @@ void drawLives(int lives, int height, int width){
 		glEnd();
 	}
 	glColor3ub(0,255,0);		//change color back to green
+}
+
+
+void updateHighScoreFile()
+{
+	string filename = "src/HighScores.txt";
+        ofstream myfile;
+	myfile.open(filename);
+	myfile << "hello world" << filename;
+	myfile.close(); 
+}
+
+void readHighScoreFile()
+{
+	ifstream infile;
+	infile.open("HighScores.txt");
+
+	if(!infile.is_open())		//checks if file is available
+	{
+		string filename = "src/HighScores.txt";
+       		ofstream myfile;
+		myfile.open(filename);
+		myfile << "hello world" << filename;
+		myfile.close(); 
+	}
 }
