@@ -16,6 +16,7 @@ pos(position) {
 	this->vel = {rand_range(1.0),rand_range(1.0),0.0};
 	this->theta = 0.0;
 	this->alpha = rand_range(0.05);
+	this->radius = radius*1.5; // since we are random between 0.5-1.5 * radius
 
 	float iwx = 1 - rand_range(0.5), wx = iwx;
 	float iwy = 1 - rand_range(0.5), wy = iwy;
@@ -50,6 +51,11 @@ pos(position), verts(vertices) {
     std::vector<vec3> tris = triangulate(verts, CCW_WINDING);
     this->area = area_of_tris(tris);
 	this->clipped = 0;
+
+	float maxr = vec3Mag(verts[0]);
+	maxr = vec3Mag(verts[1])>maxr ? vec3Mag(verts[1]) : maxr;
+	maxr = vec3Mag(verts[2])>maxr ? vec3Mag(verts[1]) : maxr;
+	this->radius = maxr;
 }
 
 void Asteroid::transformVerts() {
@@ -87,19 +93,20 @@ void Asteroid::render(int tessControl) {
 	tris = triangulate(this->Tverts, CCW_WINDING);
 	switch(this->drawstyle) {
 		case FILLED:
-                        glColor3ub(0,0,0);
-                        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-                        glBegin(GL_TRIANGLES);
-                        for(unsigned i=0; i < tris.size(); i++) {
-                                glVertex3f(tris[i].x, tris[i].y, 0.0);
-                        }
+            glColor3ub(0,0,0);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            glBegin(GL_TRIANGLES);
+            for(unsigned i=0; i < tris.size(); i++) {
+            	glVertex3f(tris[i].x, tris[i].y, 0.5);
+            }
+            glEnd();
 			glColor3ub(255,255,255);
-                        glEnd();
 			glBegin(GL_LINE_LOOP);
 			for(unsigned i=0; i < this->Tverts.size(); i++) {
-				glVertex3f(this->Tverts[i].x, this->Tverts[i].y, 0.0);
+				glVertex3f(this->Tverts[i].x, this->Tverts[i].y, 1.0);
 			}
 			glEnd();
+			break;
 		case OUTLINE:
 			// draw the asteroid
 			glColor3ub(255,255,255);

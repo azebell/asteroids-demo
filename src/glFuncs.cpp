@@ -11,6 +11,10 @@ void setupGlut( int wpx, int wpy, int wdx, int wdy ) {
 	glutInitWindowSize(wdx, wdy);
 	glutInitWindowPosition(wpx, wpy);
 	glutCreateWindow("Clipping");
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+
 	setupGL(wdx, wdy);
 }
 
@@ -25,7 +29,7 @@ void setupGL( int wdx, int wdy ) {
 }
 
 void clearScreen( void ) {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void swapBuffers( void ) {

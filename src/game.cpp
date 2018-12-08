@@ -19,7 +19,7 @@ Game::Game() {
 
 }
 
-void Game::init(int window_width, int window_height, float octRadius) {
+void Game::init(int window_width, int window_height, float octRadius, int populace) {
 
     if(getReset()){
         asteroids.clear();
@@ -27,6 +27,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
     }
     
     this->octRadius = octRadius;
+	this->iPopulace = populace;
     this->origin = { window_width/2.0f, window_height/2.0f };
 
     // generate some asteroids
@@ -37,7 +38,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
     srand(time(NULL)); // seed the rand() function with the time
 
-    for(int i=0; i<50; i++) {
+    for(int i=0; i<populace; i++) {
         float rando = ((rand()%(int)octRadius)*1.5) - octRadius/1.3; // x position rng
         float rando2 = ((rand()%(int)octRadius)*1.5) - octRadius/1.3; // y position rng
         float arearando = ((rand()%5)) + 5;             // asteroid area rng
@@ -233,16 +234,19 @@ void Game::resolveCollisions() {
 
 void Game::resolveOverlaps() {
 	for(unsigned i=0; i<this->asteroids.size(); i++) {		//check asteorid collisions
+		//asteroids[i].setDrawStyle(Asteroid::FILLED);
 		for(unsigned j=0; j<this->asteroids.size(); j++) {	//check collisions with other asteroids
 			if(i==j) {
-				asteroids[i].setDrawStyle(Asteroid::FILLED);
+				//asteroids[i].setDrawStyle(Asteroid::FILLED); // this just sets everything to filled, not good
 				continue;
 			}
-			if(poly_intersect(asteroids[i].Tverts, asteroids[j].Tverts)) {
-				if(asteroids[i].area < asteroids[j].area)
-					asteroids[i].setDrawStyle(Asteroid::FILLED);
-				else
-					asteroids[j].setDrawStyle(Asteroid::FILLED);
+			if( vec3Mag(asteroids[i].pos - asteroids[j].pos) < asteroids[i].radius+asteroids[j].radius ) { // check that the bounding circles intersect
+				if(poly_intersect(asteroids[i].Tverts, asteroids[j].Tverts)) {
+					if(asteroids[i].area < asteroids[j].area)
+						asteroids[i].setDrawStyle(Asteroid::FILLED);
+					else
+						asteroids[j].setDrawStyle(Asteroid::FILLED);
+				}
 			}
 		}
 

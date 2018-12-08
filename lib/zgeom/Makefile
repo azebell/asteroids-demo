@@ -2,7 +2,7 @@
 CC       = gcc
 CXX      = g++
 CFLAGS   = -Wall
-CXXFLAGS = -std=c++11 -Wall
+CXXFLAGS = -std=c++11 -Wall -O2
 LDLIBS   = -lglut -lGL -lGLU -lm
 INCLUDE  = -I./
 
