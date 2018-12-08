@@ -25,10 +25,11 @@ public:
 	std::vector<Missile> missiles;
 
 	std::vector<int> scoreboardVals;
-        int missileCount;
+	int missileCount;
 	int asDestroy;
 	float destroyRatio;
 	float octRadius;
+	int iPopulace;
 	int hitAsteroidType;
 	int score;
 	int lives;
@@ -38,7 +39,7 @@ public:
 //	std::vector<int> highscore;
 
 	Game();
-	void init(int window_width, int window_height, float octRadius);
+	void init(int window_width, int window_height, float octRadius, int populace);
 	void update();
 	void render();
 	int checkClipping(std::vector<vec3> vertices);

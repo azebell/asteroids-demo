@@ -53,10 +53,13 @@ int main(int argc, char** argv) {
 	);
 
 	float radius = 400.0;
+	int populace = 50;
 	if(argc >= 2)
 		radius = atof(argv[1])/2.0;
+	if(argc >= 3)
+		populace = atoi(argv[2]);
 
-	g.init(Game::WINDOW_MAX_X, Game::WINDOW_MAX_Y, radius);
+	g.init(Game::WINDOW_MAX_X, Game::WINDOW_MAX_Y, radius, populace);
 	currTime = 0;
 	accumulator = 0;
         

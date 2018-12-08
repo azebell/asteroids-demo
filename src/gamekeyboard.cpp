@@ -31,7 +31,7 @@ void Game::keyDown(unsigned char key, int x, int y) {
             if(reset == false){
                 reset = true;
                 paused = false;
-                init(WINDOW_MAX_X,WINDOW_MAX_Y,octRadius);
+                init(WINDOW_MAX_X,WINDOW_MAX_Y,octRadius,iPopulace);
 				gameover = false;
                 update();
                 render();

@@ -19,7 +19,7 @@ Game::Game() {
 
 }
 
-void Game::init(int window_width, int window_height, float octRadius) {
+void Game::init(int window_width, int window_height, float octRadius, int populace) {
 
     if(getReset()){
         asteroids.clear();
@@ -27,6 +27,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
     }
     
     this->octRadius = octRadius;
+	this->iPopulace = populace;
     this->origin = { window_width/2.0f, window_height/2.0f };
 
     // generate some asteroids
@@ -37,7 +38,7 @@ void Game::init(int window_width, int window_height, float octRadius) {
 
     srand(time(NULL)); // seed the rand() function with the time
 
-    for(int i=0; i<50; i++) {
+    for(int i=0; i<populace; i++) {
         float rando = ((rand()%(int)octRadius)*1.5) - octRadius/1.3; // x position rng
         float rando2 = ((rand()%(int)octRadius)*1.5) - octRadius/1.3; // y position rng
         float arearando = ((rand()%5)) + 5;             // asteroid area rng
